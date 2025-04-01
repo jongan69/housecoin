@@ -34,24 +34,48 @@ function createColorGenerator() {
   };
 }
 
-function BackgroundAnimator({ speed }: { speed: number }) {
-  const { gl } = useThree();
-  const getNextColor = useMemo(createColorGenerator, []);
-  const [color, setColor] = useState(getNextColor());
+function VideoBackground({ isPlaying }: { isPlaying: boolean }) {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [error, setError] = useState(false);
 
   useEffect(() => {
-    const intervalId = setInterval(() => {
-      setColor(getNextColor());
-    }, speed);
+    if (videoRef.current) {
+      if (isPlaying) {
+        videoRef.current.play().catch(err => {
+          console.error('Error playing video:', err);
+          setError(true);
+        });
+      } else {
+        videoRef.current.pause();
+      }
+    }
+  }, [isPlaying]);
 
-    return () => clearInterval(intervalId);
-  }, [speed]);
+  const handleError = () => {
+    console.error('Video failed to load');
+    setError(true);
+  };
 
-  useEffect(() => {
-    gl.setClearColor(color);
-  }, [color, gl]);
+  if (error) {
+    return (
+      <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-amber-900/50 to-purple-900/50 z-0" />
+    );
+  }
 
-  return null;
+  return (
+    <video
+      ref={videoRef}
+      className="absolute top-0 left-0 w-full h-full object-cover z-0"
+      onError={handleError}
+      loop
+      muted
+      playsInline
+    >
+      <source src="/house-video.mp4" type="video/mp4" />
+      <source src="/house-video.mov" type="video/quicktime" />
+      Your browser does not support the video tag.
+    </video>
+  );
 }
 
 type AudioVisualizerProps = {
@@ -342,28 +366,57 @@ export default function InteractiveHouse() {
   };
 
   if (!audioContext) {
-    return <div>Loading...</div>;
+    return (
+      <div className="w-full h-[100vh] md:h-[1000px] rounded-2xl overflow-hidden relative flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-amber-500 mx-auto mb-4"></div>
+          <h2 className="text-2xl font-bold text-white">Loading HOUSECOIN...</h2>
+        </div>
+      </div>
+    );
   }
 
   return (
-    <div className="w-full h-[100vh] md:h-[1000px] rounded-2xl overflow-hidden bg-gradient-to-br from-amber-900/50 to-purple-900/50">
-      <div className="absolute top-4 left-1/2 transform -translate-x-1/2 z-10 text-center px-4">
-        <h2 className="text-2xl md:text-4xl font-bold text-white mb-2">Welcome to HOUSECOIN! 🏠</h2>
+    <div className="w-full h-[100vh] md:h-[1000px] rounded-2xl overflow-hidden relative">
+      {/* Dark overlay for better text readability */}
+      <div className="absolute inset-0 bg-black/30 z-10" />
+      
+      <VideoBackground isPlaying={isPlaying} />
+      
+      {/* Controls container with glassmorphism */}
+      <div className="absolute top-4 left-1/2 transform -translate-x-1/2 z-20 text-center px-6 py-4 rounded-2xl backdrop-blur-md bg-white/10 border border-white/20 shadow-xl">
+        <h2 className="text-2xl md:text-4xl font-bold text-white mb-4 tracking-tight">
+          Welcome to <span className="text-amber-400">HOUSECOIN</span> 🏠
+        </h2>
         <button
           onClick={togglePlay}
-          className="px-4 md:px-6 py-2 md:py-3 bg-gradient-to-r from-amber-500 to-purple-500 text-white rounded-full font-bold text-base md:text-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 active:scale-95"
+          className="group relative px-6 md:px-8 py-3 md:py-4 bg-gradient-to-r from-amber-500 to-purple-500 text-white rounded-full font-bold text-base md:text-lg shadow-lg hover:shadow-amber-500/30 transition-all duration-300 transform hover:scale-105 active:scale-95 overflow-hidden"
         >
-          {isPlaying ? '⏸️ Pause Music' : '▶️ Play Music'}
+          <span className="relative z-10 flex items-center justify-center gap-2">
+            {isPlaying ? (
+              <>
+                <span className="text-xl">⏸️</span>
+                <span>Pause</span>
+              </>
+            ) : (
+              <>
+                <span className="text-xl">▶️</span>
+                <span>Play</span>
+              </>
+            )}
+          </span>
+          <div className="absolute inset-0 bg-gradient-to-r from-amber-600 to-purple-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
         </button>
       </div>
+
       <Canvas
         camera={{ position: [30, 30, 30], fov: 45 }}
         style={{ touchAction: 'none' }}
+        className="relative z-10"
       >
         <Suspense fallback={null}>
           <House isPlaying={isPlaying} audioContext={audioContext} />
           <AudioVisualizer url="/house-music.mp3" position={[0, -2, 0]} isPlaying={isPlaying} audioContext={audioContext} />
-          <BackgroundAnimator speed={1000} />
           <Environment preset="sunset" />
           <ambientLight intensity={0.5} />
           <directionalLight position={[10, 10, 5]} intensity={1} />
