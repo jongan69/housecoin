@@ -68,24 +68,24 @@ export default function ContractAddress({ address }: ContractAddressProps) {
       className={`bg-white/10 p-4 sm:p-4 rounded-lg max-w-2xl mx-auto backdrop-blur-sm mt-6 
         cursor-pointer transform transition-all duration-300 active:scale-95 hover:scale-105 
         hover:bg-white/15 relative group ${roaring ? 'animate-shake' : ''}
-        touch-manipulation`} // Improves touch response
+        touch-manipulation`}
     >
-      <p className="text-xs sm:text-sm font-mono break-all relative">
-        Contract Address: {" "}
+      <div className="text-xs sm:text-sm font-mono break-all relative">
+        <span>Contract Address: </span>
         <br />
         <span className="text-yellow-400">
           {address}
         </span>
         <span
           className={`absolute -top-6 sm:-top-8 left-1/2 transform -translate-x-1/2 
-    px-3 py-1 text-sm rounded-full shadow-lg transition-opacity duration-300 
-    ${copied ? 'opacity-100 bg-black' : 'opacity-0'}`}
+            px-3 py-1 text-sm rounded-full shadow-lg transition-opacity duration-300 
+            ${copied ? 'opacity-100 bg-black' : 'opacity-0'}`}
         >
           HOUSE MODE:
           <br />
           <span className="text-green-500">ENABLED</span>
         </span>
-      </p>
+      </div>
       <div className="absolute right-2 top-1/2 transform -translate-y-1/2 
         opacity-100 transition-opacity duration-300">
         {copied ? '✅' : '📋'}

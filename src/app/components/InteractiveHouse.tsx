@@ -4,7 +4,6 @@ import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import { OrbitControls, Environment } from '@react-three/drei';
 import { Suspense, useEffect, useRef, useMemo, useState } from 'react';
 import * as THREE from 'three';
-// import { suspend } from 'suspend-react';
 
 interface AudioData extends Uint8Array {
   avg: number;
@@ -46,7 +45,7 @@ function BackgroundAnimator({ speed }: { speed: number }) {
     }, speed);
 
     return () => clearInterval(intervalId);
-  }, [speed, getNextColor]);
+  }, [speed]);
 
   useEffect(() => {
     gl.setClearColor(color);
@@ -56,6 +55,7 @@ function BackgroundAnimator({ speed }: { speed: number }) {
 }
 
 type AudioVisualizerProps = {
+  url: string;
   y?: number;
   space?: number;
   width?: number;
@@ -67,13 +67,13 @@ type AudioVisualizerProps = {
   children?: React.ReactNode;
 };
 
-function AudioVisualizer({ y = 2500, space = 1.8, width = 0.01, height = 0.05, obj = new THREE.Object3D(), isPlaying, audioContext, ...props }: AudioVisualizerProps & { isPlaying: boolean, audioContext: AudioContextType }) {
+function AudioVisualizer({ url, y = 2500, space = 1.8, width = 0.01, height = 0.05, obj = new THREE.Object3D(), isPlaying, audioContext, ...props }: AudioVisualizerProps & { isPlaying: boolean, audioContext: AudioContextType }) {
   const ref = useRef<THREE.InstancedMesh>(null);
   const { data, update } = audioContext;
 
-  useFrame(() => {
+  useFrame((state) => {
     if (!ref.current) return;
-    const avg = isPlaying ? update() : 0;
+    let avg = isPlaying ? update() : 0;
     for (let i = 0; i < data.length; i++) {
       obj.position.set(i * width * space - (data.length * width * space) / 2, data[i] / y, 0);
       obj.updateMatrix();
@@ -241,7 +241,7 @@ export default function InteractiveHouse() {
         audioContext.context.close();
       }
     };
-  }, [audioContext]);
+  }, []);
 
   const togglePlay = () => {
     if (audioContext) {
@@ -274,7 +274,7 @@ export default function InteractiveHouse() {
       >
         <Suspense fallback={null}>
           <House isPlaying={isPlaying} audioContext={audioContext} />
-          <AudioVisualizer position={[0, -2, 0]} isPlaying={isPlaying} audioContext={audioContext} />
+          <AudioVisualizer url="/house-music.mp3" position={[0, -2, 0]} isPlaying={isPlaying} audioContext={audioContext} />
           <BackgroundAnimator speed={1000} />
           <Environment preset="sunset" />
           <ambientLight intensity={0.5} />

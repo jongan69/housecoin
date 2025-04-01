@@ -136,7 +136,7 @@ export default async function Home() {
   const headerImage = tokenInfo.pair?.[0]?.ti?.headerImage;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-amber-900/90 via-black to-purple-900/90 text-white overflow-hidden">
+    <div className="min-h-screen bg-gradient-to-br from-emerald-900/90 via-black to-indigo-900/90 text-white overflow-hidden">
       {/* Hero Section with Parallax Effect */}
       <div className="relative w-full h-screen overflow-hidden pb-10 sm:pb-8">
         {/* Animated Background */}
@@ -153,7 +153,7 @@ export default async function Home() {
             />
             {/* Enhanced overlay with multiple gradient layers */}
             <div className="absolute inset-0 w-full h-full bg-gradient-to-b from-black/90 via-black/80 to-black/90"></div>
-            <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-black/50 via-transparent to-black/50"></div>
+            <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-emerald-500/20 via-transparent to-indigo-500/20"></div>
             <div className="absolute inset-0 w-full h-full bg-[radial-gradient(circle_at_center,transparent_0%,black_100%)]"></div>
           </div>
         </div>
@@ -170,11 +170,11 @@ export default async function Home() {
         
         {/* Floating Elements - Enhanced */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div className="absolute top-20 left-10 w-20 h-20 bg-yellow-500/10 rounded-full blur-3xl animate-float"></div>
-          <div className="absolute top-40 right-20 w-32 h-32 bg-purple-500/10 rounded-full blur-3xl animate-float-delayed"></div>
-          <div className="absolute bottom-20 left-1/2 w-24 h-24 bg-amber-500/10 rounded-full blur-3xl animate-float-more-delayed"></div>
-          <div className="absolute top-1/2 right-1/3 w-40 h-40 bg-blue-500/10 rounded-full blur-3xl animate-float-slow"></div>
-          <div className="absolute bottom-1/3 left-1/4 w-36 h-36 bg-pink-500/10 rounded-full blur-3xl animate-float-slower"></div>
+          <div className="absolute top-20 left-10 w-20 h-20 bg-emerald-500/10 rounded-full blur-3xl animate-float"></div>
+          <div className="absolute top-40 right-20 w-32 h-32 bg-indigo-500/10 rounded-full blur-3xl animate-float-delayed"></div>
+          <div className="absolute bottom-20 left-1/2 w-24 h-24 bg-teal-500/10 rounded-full blur-3xl animate-float-more-delayed"></div>
+          <div className="absolute top-1/2 right-1/3 w-40 h-40 bg-cyan-500/10 rounded-full blur-3xl animate-float-slow"></div>
+          <div className="absolute bottom-1/3 left-1/4 w-36 h-36 bg-blue-500/10 rounded-full blur-3xl animate-float-slower"></div>
         </div>
 
         {/* Animated Particles */}
@@ -197,38 +197,38 @@ export default async function Home() {
         <div className="relative h-full flex flex-col items-center justify-center px-4 z-10">
           <div className="text-center space-y-4 sm:space-y-8 max-w-4xl mx-auto">
             <div className="relative">
-              <div className="absolute -inset-4 bg-gradient-to-r from-yellow-500/10 to-amber-500/10 rounded-full blur-2xl animate-pulse-slow"></div>
+              <div className="absolute -inset-4 bg-gradient-to-r from-emerald-500/10 to-teal-500/10 rounded-full blur-2xl animate-pulse-slow"></div>
               <div className="relative mx-auto mb-4 sm:mb-8 w-24 h-24 sm:w-40 sm:h-40 animate-float-subtle">
                 {tokenInfo.pair?.[0]?.ti?.image && (
                   <Image 
                     src={tokenInfo.pair?.[0]?.ti?.image} 
                     alt="Token Logo" 
                     fill
-                    className="rounded-full object-cover border-4 border-yellow-500/30 shadow-lg shadow-yellow-500/10"
+                    className="rounded-full object-cover border-4 border-emerald-500/30 shadow-lg shadow-emerald-500/10"
                   />
                 )}
               </div>
             </div>
             
-            <h1 className="text-4xl sm:text-7xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-yellow-500 via-amber-500 to-yellow-500 animate-title-glow">
-              HOUSECOIN 🏠
+            <h1 className="text-4xl sm:text-7xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-teal-400 to-indigo-400 animate-title-glow">
+              HOUSECOIN 
             </h1>
             
             <div className="space-y-4 sm:space-y-6">
-              <p className="text-lg sm:text-2xl font-semibold text-yellow-400 animate-fade-in-up">
+              <p className="text-lg sm:text-2xl font-semibold text-emerald-400 animate-fade-in-up">
                 Flipping the Housing Market, One $HOUSE at a Time 🏗️
               </p>
               <p className="text-base sm:text-lg text-gray-300 max-w-2xl mx-auto leading-relaxed animate-fade-in-up-delayed">
                 {description}
               </p>
-              <p className="text-base sm:text-lg text-gray-300 max-w-2xl mx-auto leading-relaxed animate-fade-in-up-delayed">
+              <div className="text-base sm:text-lg text-gray-300 max-w-2xl mx-auto leading-relaxed animate-fade-in-up-delayed">
                 <ContractAddress address={CONTRACT_ADDRESS} />
-              </p>
+              </div>
             </div>
 
             {/* Price Display - Enhanced */}
             <div className="bg-white/5 backdrop-blur-lg rounded-2xl sm:rounded-3xl p-4 sm:p-8 shadow-2xl border border-white/10 transform hover:scale-105 transition-all duration-300 animate-fade-in-up">
-              <p className="text-3xl sm:text-5xl font-bold text-yellow-400 mb-2 sm:mb-4 animate-pulse-slow">
+              <p className="text-3xl sm:text-5xl font-bold text-emerald-400 mb-2 sm:mb-4 animate-pulse-slow">
                 ${Number(mainPair?.priceUsd || 0).toFixed(6)} USD
               </p>
               <div className="flex flex-col sm:flex-row justify-center gap-2 sm:gap-6 text-xs sm:text-sm">
@@ -249,44 +249,44 @@ export default async function Home() {
                 href={`https://raydium.io/swap/?inputMint=sol&outputMint=${CONTRACT_ADDRESS}&referrer=9yA9LPCRv8p8V8ZvJVYErrVGWbwqAirotDTQ8evRxE5N`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group relative px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-yellow-500 to-amber-500 rounded-full text-base sm:text-lg font-bold 
+                className="group relative px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-emerald-500 to-teal-500 rounded-full text-base sm:text-lg font-bold 
                   hover:opacity-90 transition-all transform hover:scale-105 hover:rotate-1 overflow-hidden w-full sm:w-auto"
               >
                 <span className="relative z-10">Buy Your First House 🏠</span>
-                <div className="absolute inset-0 bg-gradient-to-r from-yellow-500/0 via-white/20 to-yellow-500/0 
+                <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/0 via-white/20 to-emerald-500/0 
                   translate-x-[-200%] group-hover:translate-x-[200%] transition-transform duration-1000"></div>
               </a>
               <a
                 href={`https://t.me/bonkbot_bot?start=ref_jyzn2_ca_${CONTRACT_ADDRESS}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group relative px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-blue-500 to-blue-600 rounded-full text-base sm:text-lg font-bold 
+                className="group relative px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-full text-base sm:text-lg font-bold 
                   hover:opacity-90 transition-all transform hover:scale-105 hover:rotate-1 overflow-hidden w-full sm:w-auto"
               >
                 <span className="relative z-10">Quick Flip with BONKbot 🤖</span>
-                <div className="absolute inset-0 bg-gradient-to-r from-blue-500/0 via-white/20 to-blue-500/0 
+                <div className="absolute inset-0 bg-gradient-to-r from-indigo-500/0 via-white/20 to-indigo-500/0 
                   translate-x-[-200%] group-hover:translate-x-[200%] transition-transform duration-1000"></div>
               </a>
               <a
                 href={`https://phantom.app/tokens/solana/${CONTRACT_ADDRESS}?referralId=m0ezk5sfqrs`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group relative px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-purple-500 to-purple-600 rounded-full text-base sm:text-lg font-bold 
+                className="group relative px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-full text-base sm:text-lg font-bold 
                   hover:opacity-90 transition-all transform hover:scale-105 hover:rotate-1 overflow-hidden w-full sm:w-auto"
               >
                 <span className="relative z-10">Store in Your Wallet 👻</span>
-                <div className="absolute inset-0 bg-gradient-to-r from-purple-500/0 via-white/20 to-purple-500/0 
+                <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/0 via-white/20 to-cyan-500/0 
                   translate-x-[-200%] group-hover:translate-x-[200%] transition-transform duration-1000"></div>
               </a>
               <a
                 href={MOONSHOT_LINK}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group relative px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-pink-500 to-rose-500 rounded-full text-base sm:text-lg font-bold 
+                className="group relative px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-teal-500 to-emerald-500 rounded-full text-base sm:text-lg font-bold 
                   hover:opacity-90 transition-all transform hover:scale-105 hover:rotate-1 overflow-hidden w-full sm:w-auto"
               >
                 <span className="relative z-10">Moon Shot 🚀</span>
-                <div className="absolute inset-0 bg-gradient-to-r from-pink-500/0 via-white/20 to-pink-500/0 
+                <div className="absolute inset-0 bg-gradient-to-r from-teal-500/0 via-white/20 to-teal-500/0 
                   translate-x-[-200%] group-hover:translate-x-[200%] transition-transform duration-1000"></div>
               </a>
             </div>
@@ -305,7 +305,7 @@ export default async function Home() {
       {/* Interactive 3D House - More prominent */}
       <div className="container mx-auto px-4 py-12 sm:py-24 relative z-10">
         <div className="bg-white/5 rounded-2xl sm:rounded-3xl p-6 sm:p-12 border border-white/10 shadow-2xl">
-          <h2 className="text-3xl sm:text-4xl font-bold text-center mb-4 sm:mb-6 text-transparent bg-clip-text bg-gradient-to-r from-yellow-500 to-amber-500">
+          <h2 className="text-3xl sm:text-4xl font-bold text-center mb-4 sm:mb-6 text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-teal-400">
             Your Digital Home 🏠
           </h2>
           <p className="text-center text-gray-300 mb-8 sm:mb-12 max-w-2xl mx-auto text-base sm:text-lg leading-relaxed">
@@ -321,11 +321,11 @@ export default async function Home() {
       <div className="container mx-auto px-4 py-12 sm:py-24 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-8">
           <div className="group bg-white/5 p-6 sm:p-10 rounded-2xl sm:rounded-3xl backdrop-blur-lg hover:bg-white/10 transition-all transform hover:scale-105 
-            border border-white/10 shadow-2xl hover:shadow-yellow-500/20">
+            border border-white/10 shadow-2xl hover:shadow-emerald-500/20">
             <div className="relative">
-              <div className="absolute -inset-4 bg-gradient-to-r from-yellow-500/10 to-amber-500/10 rounded-full blur-xl opacity-0 
+              <div className="absolute -inset-4 bg-gradient-to-r from-emerald-500/10 to-teal-500/10 rounded-full blur-xl opacity-0 
                 group-hover:opacity-100 transition-opacity"></div>
-              <h3 className="text-3xl sm:text-4xl font-bold text-yellow-400 relative">
+              <h3 className="text-3xl sm:text-4xl font-bold text-emerald-400 relative">
                 {formatNumber(parseFloat(totalSupply))}
               </h3>
             </div>
@@ -334,11 +334,11 @@ export default async function Home() {
           </div>
           
           <div className="group bg-white/5 p-6 sm:p-10 rounded-2xl sm:rounded-3xl backdrop-blur-lg hover:bg-white/10 transition-all transform hover:scale-105 
-            border border-white/10 shadow-2xl hover:shadow-purple-500/20">
+            border border-white/10 shadow-2xl hover:shadow-indigo-500/20">
             <div className="relative">
-              <div className="absolute -inset-4 bg-gradient-to-r from-purple-500/10 to-blue-500/10 rounded-full blur-xl opacity-0 
+              <div className="absolute -inset-4 bg-gradient-to-r from-indigo-500/10 to-purple-500/10 rounded-full blur-xl opacity-0 
                 group-hover:opacity-100 transition-opacity"></div>
-              <h3 className="text-3xl sm:text-4xl font-bold text-purple-400 relative">
+              <h3 className="text-3xl sm:text-4xl font-bold text-indigo-400 relative">
                 ${formatNumber(mainPair.liquidity.usd)}
               </h3>
             </div>
@@ -347,11 +347,11 @@ export default async function Home() {
           </div>
           
           <div className="group bg-white/5 p-6 sm:p-10 rounded-2xl sm:rounded-3xl backdrop-blur-lg hover:bg-white/10 transition-all transform hover:scale-105 
-            border border-white/10 shadow-2xl hover:shadow-pink-500/20">
+            border border-white/10 shadow-2xl hover:shadow-cyan-500/20">
             <div className="relative">
-              <div className="absolute -inset-4 bg-gradient-to-r from-pink-500/10 to-rose-500/10 rounded-full blur-xl opacity-0 
+              <div className="absolute -inset-4 bg-gradient-to-r from-cyan-500/10 to-blue-500/10 rounded-full blur-xl opacity-0 
                 group-hover:opacity-100 transition-opacity"></div>
-              <h3 className="text-3xl sm:text-4xl font-bold text-pink-400 relative">
+              <h3 className="text-3xl sm:text-4xl font-bold text-cyan-400 relative">
                 {holderCount.toLocaleString()}
               </h3>
             </div>
@@ -370,13 +370,13 @@ export default async function Home() {
 
       {/* Distribution Section - More elegant */}
       <div className="container mx-auto px-4 py-12 sm:py-24 relative z-10">
-        <h2 className="text-3xl sm:text-4xl font-bold text-center mb-8 sm:mb-16 text-transparent bg-clip-text bg-gradient-to-r from-yellow-500 to-amber-500">
+        <h2 className="text-3xl sm:text-4xl font-bold text-center mb-8 sm:mb-16 text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-teal-400">
           HOUSENOMICS
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-12">
           <div className="group bg-white/5 p-6 sm:p-10 rounded-2xl sm:rounded-3xl backdrop-blur-lg hover:bg-white/10 transition-all transform hover:scale-105 
             border border-white/10 shadow-2xl">
-            <h3 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-8 text-yellow-400">Top Landlords</h3>
+            <h3 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-8 text-emerald-400">Top Landlords</h3>
             <ul className="space-y-3 sm:space-y-4">
               {topHolders.map((holder, index) => (
                 <li key={index} className="group/item flex justify-between items-center p-4 sm:p-6 rounded-xl sm:rounded-2xl bg-white/5 
@@ -385,14 +385,14 @@ export default async function Home() {
                     href={`https://solscan.io/account/${holder.id}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-sm sm:text-base hover:text-yellow-400 transition-colors"
+                    className="text-sm sm:text-base hover:text-emerald-400 transition-colors"
                   >
                     {holder.id === '5Q544fKrFoe6tsEbD7S8EmxGTJYAKtTVhAW5Q5pge4j1' ? 
                       'RAYDIUM' : 
                       `${holder.id.slice(0, 8)}...${holder.id.slice(-4)}`
                     }
                   </a>
-                  <span className="text-sm sm:text-base text-yellow-400 font-semibold">{holder.percentage.toFixed(2)}%</span>
+                  <span className="text-sm sm:text-base text-emerald-400 font-semibold">{holder.percentage.toFixed(2)}%</span>
                 </li>
               ))}
             </ul>
@@ -400,27 +400,27 @@ export default async function Home() {
           
           <div className="group bg-white/5 p-6 sm:p-10 rounded-2xl sm:rounded-3xl backdrop-blur-lg hover:bg-white/10 transition-all transform hover:scale-105 
             border border-white/10 shadow-2xl">
-            <h3 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-8 text-yellow-400">Housing Market Analysis</h3>
+            <h3 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-8 text-emerald-400">Housing Market Analysis</h3>
             <ul className="space-y-3 sm:space-y-4">
               <li className="group/item flex justify-between items-center p-4 sm:p-6 rounded-xl sm:rounded-2xl bg-white/5 
                 hover:bg-white/10 transition-all transform hover:translate-x-2">
                 <span className="text-sm sm:text-base">Founded</span>
-                <span className="text-sm sm:text-base text-yellow-400">{createdAt}</span>
+                <span className="text-sm sm:text-base text-emerald-400">{createdAt}</span>
               </li>
               <li className="group/item flex justify-between items-center p-4 sm:p-6 rounded-xl sm:rounded-2xl bg-white/5 
                 hover:bg-white/10 transition-all transform hover:translate-x-2">
                 <span className="text-sm sm:text-base">Community Size</span>
-                <span className="text-sm sm:text-base text-yellow-400">{holderCount.toLocaleString()} members</span>
+                <span className="text-sm sm:text-base text-emerald-400">{holderCount.toLocaleString()} members</span>
               </li>
               <li className="group/item flex justify-between items-center p-4 sm:p-6 rounded-xl sm:rounded-2xl bg-white/5 
                 hover:bg-white/10 transition-all transform hover:translate-x-2">
                 <span className="text-sm sm:text-base">Market Value</span>
-                <span className="text-sm sm:text-base text-yellow-400">${formatNumber(mainPair.marketCap)}</span>
+                <span className="text-sm sm:text-base text-emerald-400">${formatNumber(mainPair.marketCap)}</span>
               </li>
               <li className="group/item flex justify-between items-center p-4 sm:p-6 rounded-xl sm:rounded-2xl bg-white/5 
                 hover:bg-white/10 transition-all transform hover:translate-x-2">
                 <span className="text-sm sm:text-base">Future Value</span>
-                <span className="text-sm sm:text-base text-yellow-400">${formatNumber(mainPair.fdv)}</span>
+                <span className="text-sm sm:text-base text-emerald-400">${formatNumber(mainPair.fdv)}</span>
               </li>
             </ul>
           </div>
@@ -458,7 +458,7 @@ export default async function Home() {
                   )}
                   <span>🏠</span>
                 </span>
-                <div className="absolute inset-0 bg-gradient-to-r from-yellow-500/0 via-white/20 to-yellow-500/0 
+                <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/0 via-white/20 to-emerald-500/0 
                   translate-x-[-200%] group-hover:translate-x-[200%] transition-transform duration-1000 opacity-0 group-hover:opacity-100"></div>
               </a>
             ))
