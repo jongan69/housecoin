@@ -1,7 +1,7 @@
 'use client';
 
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
-import { OrbitControls, Environment } from '@react-three/drei';
+import { OrbitControls, Environment, Text3D, Float } from '@react-three/drei';
 import { Suspense, useEffect, useRef, useMemo, useState } from 'react';
 import * as THREE from 'three';
 
@@ -95,6 +95,7 @@ function AudioVisualizer({ url, y = 2500, space = 1.8, width = 0.01, height = 0.
 
 function House({ isPlaying, audioContext }: { isPlaying: boolean, audioContext: AudioContextType }) {
   const houseRef = useRef<THREE.Group>(null);
+  const textRef = useRef<THREE.Mesh>(null);
   const { data } = audioContext;
 
   useFrame((state) => {
@@ -118,6 +119,26 @@ function House({ isPlaying, audioContext }: { isPlaying: boolean, audioContext: 
       // Add some wobble to make it more dynamic
       houseRef.current.position.x = Math.sin(time * 1.5) * (avg / 2000);
       houseRef.current.position.z = Math.cos(time * 1.5) * (avg / 2000);
+
+      // Update text color based on music intensity
+      if (textRef.current) {
+        const avg = isPlaying ? data.avg : 0;
+        const time = state.clock.getElapsedTime();
+        
+        // Create more dramatic color changes based on music intensity
+        const hue = (time * 0.5 + avg / 500) % 1; // Faster color cycling
+        const saturation = 0.8 + (avg / 1000); // Dynamic saturation
+        const lightness = 0.5 + (avg / 2000); // Dynamic brightness
+        
+        const color = new THREE.Color().setHSL(hue, saturation, lightness);
+        if (textRef.current.material instanceof THREE.MeshPhysicalMaterial) {
+          textRef.current.material.color = color;
+          textRef.current.material.emissive = color;
+          textRef.current.material.emissiveIntensity = 0.8 + (avg / 500); // More dramatic glow
+          textRef.current.material.metalness = 0.9 + (avg / 2000); // Dynamic metalness
+          textRef.current.material.roughness = 0.1 - (avg / 2000); // Dynamic roughness
+        }
+      }
     }
   });
 
@@ -190,6 +211,47 @@ function House({ isPlaying, audioContext }: { isPlaying: boolean, audioContext: 
         <sphereGeometry args={[1, 32, 32]} />
         <meshStandardMaterial color="#FFD700" emissive="#FFD700" emissiveIntensity={0.5} />
       </mesh>
+
+      {/* House Coin Text */}
+      {isPlaying && (
+        <Float
+          speed={1}
+          rotationIntensity={0.2}
+          floatIntensity={0.2}
+        >
+          <Text3D
+            ref={textRef}
+            // font="/fonts/SFProBold.json"
+            font="/fonts/optimer_bold.typeface.json"
+            size={1.1}
+            height={0.4}
+            curveSegments={32}
+            bevelEnabled={true}
+            bevelThickness={0.2}
+            bevelSize={0.05}
+            bevelOffset={0}
+            bevelSegments={20}
+            position={[-3, -1.9, 5]}
+            rotation={[-Math.PI / 2, 0, 0]}
+          >
+            HOUSE COIN
+            <meshPhysicalMaterial 
+              color="#FFD700"
+              metalness={0.9}
+              roughness={0.1}
+              clearcoat={1}
+              clearcoatRoughness={0.1}
+              envMapIntensity={2}
+              emissive="#FFD700"
+              emissiveIntensity={0.8}
+              reflectivity={0.9}
+              ior={1.5}
+              transmission={0}
+              thickness={0.8}
+            />
+          </Text3D>
+        </Float>
+      )}
     </group>
   );
 }
@@ -253,13 +315,26 @@ export default function InteractiveHouse() {
         newSource.buffer = audioContext.buffer;
         newSource.loop = true;
         
-        // Reconnect the audio graph
+        // Create a new analyzer
+        const analyser = audioContext.context.createAnalyser();
+        analyser.fftSize = 64;
+        
+        // Reconnect the audio graph with analyzer
         const gain = audioContext.gain;
-        newSource.connect(gain);
+        newSource.connect(analyser);
+        analyser.connect(gain);
         gain.connect(audioContext.context.destination);
         
-        // Update the audioContext with the new source
+        // Create new data array for the analyzer
+        const data = new Uint8Array(analyser.frequencyBinCount) as AudioData;
+        
+        // Update the audioContext with the new source, analyzer, and data
         audioContext.source = newSource;
+        audioContext.data = data;
+        audioContext.update = () => {
+          analyser.getByteFrequencyData(data);
+          return (data.avg = data.reduce((prev, cur) => prev + cur / data.length, 0));
+        };
         audioContext.source.start(0);
       }
       setIsPlaying(!isPlaying);
