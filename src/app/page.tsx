@@ -289,6 +289,28 @@ export default async function Home() {
                 <div className="absolute inset-0 bg-gradient-to-r from-teal-500/0 via-white/20 to-teal-500/0 
                   translate-x-[-200%] group-hover:translate-x-[200%] transition-transform duration-1000"></div>
               </a>
+              <a
+                href="https://slidesgpt.com/presentation/8Lmiwtw8hoLE9QyJaWOm?d=8Lmiwtw8hoLE9QyJaWOm"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group relative px-4 sm:px-8 py-2 sm:py-4 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full text-sm sm:text-lg font-bold 
+                  hover:opacity-90 transition-all transform hover:scale-105 hover:rotate-1 overflow-hidden w-full sm:w-auto"
+              >
+                <span className="relative z-10">Investor Pitch 📊</span>
+                <div className="absolute inset-0 bg-gradient-to-r from-purple-500/0 via-white/20 to-purple-500/0 
+                  translate-x-[-200%] group-hover:translate-x-[200%] transition-transform duration-1000"></div>
+              </a>
+              <a
+                href="https://x.com/i/communities/1906719518350569767"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group relative px-4 sm:px-8 py-2 sm:py-4 bg-gradient-to-r from-orange-500 to-red-500 rounded-full text-sm sm:text-lg font-bold 
+                  hover:opacity-90 transition-all transform hover:scale-105 hover:rotate-1 overflow-hidden w-full sm:w-auto"
+              >
+                <span className="relative z-10">Join The Community 🔗</span>
+                <div className="absolute inset-0 bg-gradient-to-r from-orange-500/0 via-white/20 to-orange-500/0 
+                  translate-x-[-200%] group-hover:translate-x-[200%] transition-transform duration-1000"></div>
+              </a>
             </div>
           </div>
         </div>
