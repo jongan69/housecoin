@@ -1,8 +1,8 @@
 'use client';
 
-import { Canvas, useFrame, useThree } from '@react-three/fiber';
+import { Canvas, useFrame } from '@react-three/fiber';
 import { OrbitControls, Environment, Text3D, Float } from '@react-three/drei';
-import { Suspense, useEffect, useRef, useMemo, useState } from 'react';
+import { Suspense, useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
 
 interface AudioData extends Uint8Array {
@@ -18,21 +18,21 @@ interface AudioContextType {
   update: () => number;
 }
 
-function createColorGenerator() {
-  const colors = [
-    "#FF5733", "#33FF57", "#3357FF", "#F833FF", "#33FFF8",
-    "#F8FF33", "#FF3380", "#3380FF", "#80FF33", "#FF9633",
-    "#9633FF", "#33FF96", "#FF3396", "#3396FF", "#96FF33",
-    "#33FFCA", "#CAFF33", "#FFCA33", "#33CAFF", "#CA33FF"
-  ];
-  let currentIndex = 0;
+// function createColorGenerator() {
+//   const colors = [
+//     "#FF5733", "#33FF57", "#3357FF", "#F833FF", "#33FFF8",
+//     "#F8FF33", "#FF3380", "#3380FF", "#80FF33", "#FF9633",
+//     "#9633FF", "#33FF96", "#FF3396", "#3396FF", "#96FF33",
+//     "#33FFCA", "#CAFF33", "#FFCA33", "#33CAFF", "#CA33FF"
+//   ];
+//   let currentIndex = 0;
 
-  return function getNextColor() {
-    const color = colors[currentIndex];
-    currentIndex = (currentIndex + 1) % colors.length;
-    return color;
-  };
-}
+//   return function getNextColor() {
+//     const color = colors[currentIndex];
+//     currentIndex = (currentIndex + 1) % colors.length;
+//     return color;
+//   };
+// }
 
 function VideoBackground({ isPlaying }: { isPlaying: boolean }) {
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -72,7 +72,8 @@ function VideoBackground({ isPlaying }: { isPlaying: boolean }) {
       playsInline
     >
       <source src="/house-video.mp4" type="video/mp4" />
-      <source src="/house-video.mov" type="video/quicktime" />
+      {/* MOV is too big for github */}
+      {/* <source src="/house-video.mov" type="video/quicktime" /> */}
       Your browser does not support the video tag.
     </video>
   );
