@@ -289,43 +289,84 @@ export default async function Home() {
                 <div className="absolute inset-0 bg-gradient-to-r from-teal-500/0 via-white/20 to-teal-500/0 
                   translate-x-[-200%] group-hover:translate-x-[200%] transition-transform duration-1000"></div>
               </a>
-              <a
-                href="https://slidesgpt.com/presentation/8Lmiwtw8hoLE9QyJaWOm?d=8Lmiwtw8hoLE9QyJaWOm"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group relative px-4 sm:px-8 py-2 sm:py-4 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full text-sm sm:text-lg font-bold 
-                  hover:opacity-90 transition-all transform hover:scale-105 hover:rotate-1 overflow-hidden w-full sm:w-auto"
-              >
-                <span className="relative z-10">Investor Pitch 📊</span>
-                <div className="absolute inset-0 bg-gradient-to-r from-purple-500/0 via-white/20 to-purple-500/0 
-                  translate-x-[-200%] group-hover:translate-x-[200%] transition-transform duration-1000"></div>
-              </a>
-              <a
-                href="https://x.com/i/communities/1906719518350569767"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group relative px-4 sm:px-8 py-2 sm:py-4 bg-gradient-to-r from-orange-500 to-red-500 rounded-full text-sm sm:text-lg font-bold 
-                  hover:opacity-90 transition-all transform hover:scale-105 hover:rotate-1 overflow-hidden w-full sm:w-auto"
-              >
-                <span className="relative z-10">Join The Community 🔗</span>
-                <div className="absolute inset-0 bg-gradient-to-r from-orange-500/0 via-white/20 to-orange-500/0 
-                  translate-x-[-200%] group-hover:translate-x-[200%] transition-transform duration-1000"></div>
-              </a>
             </div>
-          </div>
-        </div>
-
-        {/* Scroll Indicator - Adjusted for mobile */}
-        <div className="absolute bottom-2 sm:bottom-3 left-1/2 transform -translate-x-1/2 z-10">
-          <div className="flex flex-col items-center gap-1">
-            <span className="text-xs text-white/50 animate-pulse z-10">Scroll to explore</span>
-            <span className="text-xl sm:text-3xl animate-house-bounce">🏠</span>
           </div>
         </div>
       </div>
 
+      {/* Resources Section - New Professional Section */}
+      <div className="container mx-auto px-4 py-12 sm:py-20 relative z-10">
+        <div className="max-w-4xl mx-auto">
+          <h2 className="text-2xl sm:text-4xl font-bold text-center mb-4 sm:mb-8 text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-teal-400">
+            Resources & Community
+          </h2>
+          <p className="text-center text-gray-300 mb-8 sm:mb-12 max-w-2xl mx-auto text-sm sm:text-lg leading-relaxed">
+            Join our growing community and explore our comprehensive resources
+          </p>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-8">
+            <div className="group bg-white/5 p-6 sm:p-8 rounded-2xl sm:rounded-3xl backdrop-blur-lg hover:bg-white/10 transition-all transform hover:scale-105 
+              border border-white/10 shadow-2xl hover:shadow-purple-500/20">
+              <div className="flex flex-col items-center text-center">
+                <div className="w-16 h-16 sm:w-20 sm:h-20 mb-4 sm:mb-6 rounded-full bg-gradient-to-br from-purple-500/20 to-pink-500/20 flex items-center justify-center">
+                  <span className="text-2xl sm:text-3xl">📊</span>
+                </div>
+                <h3 className="text-xl sm:text-2xl font-bold mb-2 sm:mb-4 text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400">
+                  Investor Pitch
+                </h3>
+                <p className="text-sm sm:text-base text-gray-300 mb-4 sm:mb-6">
+                  Explore our comprehensive pitch deck and learn about our vision for revolutionizing the housing market
+                </p>
+                <a
+                  href="https://slidesgpt.com/presentation/8Lmiwtw8hoLE9QyJaWOm?d=8Lmiwtw8hoLE9QyJaWOm"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group/btn relative px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full text-sm sm:text-lg font-bold 
+                    hover:opacity-90 transition-all transform hover:scale-105 hover:rotate-1 overflow-hidden w-full sm:w-auto"
+                >
+                  <span className="relative z-10">View Pitch Deck</span>
+                  <div className="absolute inset-0 bg-gradient-to-r from-purple-500/0 via-white/20 to-purple-500/0 
+                    translate-x-[-200%] group-hover/btn:translate-x-[200%] transition-transform duration-1000"></div>
+                </a>
+              </div>
+            </div>
+
+            <div className="group bg-white/5 p-6 sm:p-8 rounded-2xl sm:rounded-3xl backdrop-blur-lg hover:bg-white/10 transition-all transform hover:scale-105 
+              border border-white/10 shadow-2xl hover:shadow-orange-500/20">
+              <div className="flex flex-col items-center text-center">
+                <div className="w-16 h-16 sm:w-20 sm:h-20 mb-4 sm:mb-6 rounded-full bg-gradient-to-br from-orange-500/20 to-red-500/20 flex items-center justify-center">
+                  <span className="text-2xl sm:text-3xl">🏘️</span>
+                </div>
+                <h3 className="text-xl sm:text-2xl font-bold mb-2 sm:mb-4 text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-red-400">
+                  Join Our Community
+                </h3>
+                <p className="text-sm sm:text-base text-gray-300 mb-4 sm:mb-6">
+                  Connect with fellow investors and stay updated with the latest news and developments
+                </p>
+                <a
+                  href="https://x.com/i/communities/1906719518350569767"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group/btn relative px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-orange-500 to-red-500 rounded-full text-sm sm:text-lg font-bold 
+                    hover:opacity-90 transition-all transform hover:scale-105 hover:rotate-1 overflow-hidden w-full sm:w-auto"
+                >
+                  <span className="relative z-10">Join Now</span>
+                  <div className="absolute inset-0 bg-gradient-to-r from-orange-500/0 via-white/20 to-orange-500/0 
+                    translate-x-[-200%] group-hover/btn:translate-x-[200%] transition-transform duration-1000"></div>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Scroll Indicator - Moved to bottom of Resources section */}
+        <div className="flex flex-col items-center gap-2 mt-16">
+          <span className="text-xs text-white/50 animate-pulse z-10">1 HOUSE = 1 $HOUSE</span>
+          <span className="text-xl sm:text-3xl animate-house-bounce">🏠</span>
+        </div>
+      </div>
+
       {/* Interactive 3D House - More prominent */}
-      <div className="container mx-auto px-4 py-8 sm:py-24 relative z-10">
+      <div className="container mx-auto px-4 relative z-10">
         <div className="bg-white/5 rounded-xl sm:rounded-3xl p-4 sm:p-12 border border-white/10 shadow-2xl">
           <h2 className="text-2xl sm:text-4xl font-bold text-center mb-3 sm:mb-6 text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-teal-400">
             Your Digital Home 🏠
