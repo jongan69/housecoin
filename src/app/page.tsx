@@ -420,7 +420,12 @@ export default async function Home() {
               <li className="group/item flex justify-between items-center p-3 sm:p-6 rounded-lg sm:rounded-2xl bg-white/5 
                 hover:bg-white/10 transition-all transform hover:translate-x-2">
                 <span className="text-xs sm:text-base">Future Value</span>
-                <span className="text-xs sm:text-base text-emerald-400">${formatNumber(mainPair.fdv)}</span>
+                <span className="text-xs sm:text-base text-emerald-400">$50T MC</span>
+              </li>
+              <li className="group/item flex justify-between items-center p-3 sm:p-6 rounded-lg sm:rounded-2xl bg-white/5 
+                hover:bg-white/10 transition-all transform hover:translate-x-2">
+                <span className="text-xs sm:text-base">Price at $50T MC</span>
+                <span className="text-xs sm:text-base text-emerald-400">${formatNumber(50000000000000 / parseFloat(totalSupply))}</span>
               </li>
             </ul>
           </div>
