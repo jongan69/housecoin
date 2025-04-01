@@ -371,7 +371,7 @@ export default function InteractiveHouse() {
             enablePan={true}
             enableRotate={true}
             minDistance={5}
-            maxDistance={30}
+            maxDistance={50}
             minPolarAngle={Math.PI / 4}
             maxPolarAngle={Math.PI / 2}
           />
