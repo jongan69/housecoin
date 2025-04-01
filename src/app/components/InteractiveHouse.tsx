@@ -346,18 +346,19 @@ export default function InteractiveHouse() {
   }
 
   return (
-    <div className="w-full h-[1000px] rounded-2xl overflow-hidden bg-gradient-to-br from-amber-900/50 to-purple-900/50">
-      <div className="absolute top-4 left-1/2 transform -translate-x-1/2 z-10 text-center">
-        <h2 className="text-4xl font-bold text-white mb-2">Welcome to HOUSECOIN! 🏠</h2>
+    <div className="w-full h-[100vh] md:h-[1000px] rounded-2xl overflow-hidden bg-gradient-to-br from-amber-900/50 to-purple-900/50">
+      <div className="absolute top-4 left-1/2 transform -translate-x-1/2 z-10 text-center px-4">
+        <h2 className="text-2xl md:text-4xl font-bold text-white mb-2">Welcome to HOUSECOIN! 🏠</h2>
         <button
           onClick={togglePlay}
-          className="px-6 py-3 bg-gradient-to-r from-amber-500 to-purple-500 text-white rounded-full font-bold text-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 active:scale-95"
+          className="px-4 md:px-6 py-2 md:py-3 bg-gradient-to-r from-amber-500 to-purple-500 text-white rounded-full font-bold text-base md:text-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 active:scale-95"
         >
           {isPlaying ? '⏸️ Pause Music' : '▶️ Play Music'}
         </button>
       </div>
       <Canvas
-        camera={{ position: [10, 10, 10], fov: 45 }}
+        camera={{ position: [30, 30, 30], fov: 45 }}
+        style={{ touchAction: 'none' }}
       >
         <Suspense fallback={null}>
           <House isPlaying={isPlaying} audioContext={audioContext} />
@@ -370,10 +371,15 @@ export default function InteractiveHouse() {
             enableZoom={true}
             enablePan={true}
             enableRotate={true}
-            minDistance={5}
-            maxDistance={50}
+            minDistance={10}
+            maxDistance={100}
             minPolarAngle={Math.PI / 4}
             maxPolarAngle={Math.PI / 2}
+            enableDamping={true}
+            dampingFactor={0.05}
+            rotateSpeed={0.5}
+            zoomSpeed={0.5}
+            panSpeed={0.5}
           />
         </Suspense>
       </Canvas>
