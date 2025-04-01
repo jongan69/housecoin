@@ -248,6 +248,18 @@ export default function InteractiveHouse() {
       if (isPlaying) {
         audioContext.source.stop();
       } else {
+        // Create a new source node
+        const newSource = audioContext.context.createBufferSource();
+        newSource.buffer = audioContext.buffer;
+        newSource.loop = true;
+        
+        // Reconnect the audio graph
+        const gain = audioContext.gain;
+        newSource.connect(gain);
+        gain.connect(audioContext.context.destination);
+        
+        // Update the audioContext with the new source
+        audioContext.source = newSource;
         audioContext.source.start(0);
       }
       setIsPlaying(!isPlaying);
