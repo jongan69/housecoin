@@ -1,10 +1,10 @@
 'use client';
 
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
-import { OrbitControls, Environment, Text } from '@react-three/drei';
+import { OrbitControls, Environment } from '@react-three/drei';
 import { Suspense, useEffect, useRef, useMemo, useState } from 'react';
 import * as THREE from 'three';
-import { suspend } from 'suspend-react';
+// import { suspend } from 'suspend-react';
 
 interface AudioData extends Uint8Array {
   avg: number;
@@ -46,7 +46,7 @@ function BackgroundAnimator({ speed }: { speed: number }) {
     }, speed);
 
     return () => clearInterval(intervalId);
-  }, [speed]);
+  }, [speed, getNextColor]);
 
   useEffect(() => {
     gl.setClearColor(color);
@@ -72,9 +72,9 @@ function AudioVisualizer({ url, y = 2500, space = 1.8, width = 0.01, height = 0.
   const ref = useRef<THREE.InstancedMesh>(null);
   const { data, update } = audioContext;
 
-  useFrame((state) => {
+  useFrame(() => {
     if (!ref.current) return;
-    let avg = isPlaying ? update() : 0;
+    const avg = isPlaying ? update() : 0;
     for (let i = 0; i < data.length; i++) {
       obj.position.set(i * width * space - (data.length * width * space) / 2, data[i] / y, 0);
       obj.updateMatrix();
@@ -242,7 +242,7 @@ export default function InteractiveHouse() {
         audioContext.context.close();
       }
     };
-  }, []);
+  }, [audioContext]);
 
   const togglePlay = () => {
     if (audioContext) {

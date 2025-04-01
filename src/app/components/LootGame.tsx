@@ -38,6 +38,26 @@ export default function LootGame() {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
+  const startGame = () => {
+    setGameStarted(true);
+    setGameOver(false);
+    setScore(0);
+    setLevel(1);
+    setTimeLeft(60);
+    setIsPoweredUp(false);
+    setHunterPosition({ x: 50, y: 50 });
+    setLoot(generateLoot());
+    setObstacles(generateObstacles());
+  };
+
+  const endGame = useCallback(() => {
+    setGameOver(true);
+    setGameStarted(false);
+    if (score > highScore) {
+      setHighScore(score);
+    }
+  }, [score, highScore]);
+
   useEffect(() => {
     let timer: NodeJS.Timeout;
     if (gameStarted && !gameOver && timeLeft > 0) {
@@ -52,7 +72,7 @@ export default function LootGame() {
       }, 1000);
     }
     return () => clearInterval(timer);
-  }, [gameStarted, gameOver, timeLeft]);
+  }, [gameStarted, gameOver, timeLeft, endGame]);
 
   const generateObstacles = useCallback(() => {
     const newObstacles: Obstacle[] = [];
@@ -88,26 +108,6 @@ export default function LootGame() {
     }
     return newLoot;
   }, []);
-
-  const startGame = () => {
-    setGameStarted(true);
-    setGameOver(false);
-    setScore(0);
-    setLevel(1);
-    setTimeLeft(60);
-    setIsPoweredUp(false);
-    setHunterPosition({ x: 50, y: 50 });
-    setLoot(generateLoot());
-    setObstacles(generateObstacles());
-  };
-
-  const endGame = () => {
-    setGameOver(true);
-    setGameStarted(false);
-    if (score > highScore) {
-      setHighScore(score);
-    }
-  };
 
   const moveHunterTo = useCallback((direction: 'up' | 'down' | 'left' | 'right') => {
     if (!gameStarted || gameOver) return;
