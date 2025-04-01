@@ -56,7 +56,6 @@ function BackgroundAnimator({ speed }: { speed: number }) {
 }
 
 type AudioVisualizerProps = {
-  url: string;
   y?: number;
   space?: number;
   width?: number;
@@ -68,7 +67,7 @@ type AudioVisualizerProps = {
   children?: React.ReactNode;
 };
 
-function AudioVisualizer({ url, y = 2500, space = 1.8, width = 0.01, height = 0.05, obj = new THREE.Object3D(), isPlaying, audioContext, ...props }: AudioVisualizerProps & { isPlaying: boolean, audioContext: AudioContextType }) {
+function AudioVisualizer({ y = 2500, space = 1.8, width = 0.01, height = 0.05, obj = new THREE.Object3D(), isPlaying, audioContext, ...props }: AudioVisualizerProps & { isPlaying: boolean, audioContext: AudioContextType }) {
   const ref = useRef<THREE.InstancedMesh>(null);
   const { data, update } = audioContext;
 
@@ -275,7 +274,7 @@ export default function InteractiveHouse() {
       >
         <Suspense fallback={null}>
           <House isPlaying={isPlaying} audioContext={audioContext} />
-          <AudioVisualizer url="/house-music.mp3" position={[0, -2, 0]} isPlaying={isPlaying} audioContext={audioContext} />
+          <AudioVisualizer position={[0, -2, 0]} isPlaying={isPlaying} audioContext={audioContext} />
           <BackgroundAnimator speed={1000} />
           <Environment preset="sunset" />
           <ambientLight intensity={0.5} />

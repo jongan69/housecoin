@@ -175,7 +175,7 @@ export default function LootGame() {
 
       return newPos;
     });
-  }, [gameStarted, gameOver, obstacles, isPoweredUp, generateLoot, generateObstacles]);
+  }, [gameStarted, gameOver, obstacles, isPoweredUp, generateLoot, generateObstacles, endGame]);
 
   const handleKeyDown = useCallback((e: KeyboardEvent) => {
     switch (e.key) {
