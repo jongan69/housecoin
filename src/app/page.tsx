@@ -244,7 +244,7 @@ export default async function Home() {
             </div>
 
             {/* Action Buttons - Enhanced */}
-            <div className="flex flex-col sm:flex-row justify-center gap-2 sm:gap-4 mt-4 sm:mt-12 animate-fade-in-up">
+            <div className="flex flex-col sm:flex-row justify-center gap-2 sm:gap-4 mt-4 sm:mt-12 mb-16 sm:mb-0 animate-fade-in-up">
               <a
                 href={`https://raydium.io/swap/?inputMint=sol&outputMint=${CONTRACT_ADDRESS}&referrer=9yA9LPCRv8p8V8ZvJVYErrVGWbwqAirotDTQ8evRxE5N`}
                 target="_blank"
@@ -293,8 +293,8 @@ export default async function Home() {
           </div>
         </div>
 
-        {/* Scroll Indicator */}
-        <div className="absolute bottom-2 sm:bottom-3 left-1/2 transform -translate-x-1/2 z-10 -mb-4">
+        {/* Scroll Indicator - Adjusted for mobile */}
+        <div className="absolute bottom-2 sm:bottom-3 left-1/2 transform -translate-x-1/2 z-10">
           <div className="flex flex-col items-center gap-1">
             <span className="text-xs text-white/50 animate-pulse z-10">Scroll to explore</span>
             <span className="text-xl sm:text-3xl animate-house-bounce">🏠</span>
