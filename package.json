@@ -1,5 +1,5 @@
 {
-  "name": "housecoin",
+  "name": "thelion",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -12,8 +12,8 @@
     "@react-three/drei": "^10.0.5",
     "@react-three/fiber": "^9.1.0",
     "next": "15.2.4",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
+    "react": "19.1.0",
+    "react-dom": "19.1.0",
     "three": "^0.175.0"
   },
   "devDependencies": {
