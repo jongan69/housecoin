@@ -147,7 +147,7 @@ export default async function Home() {
   const headerImage = tokenInfo.pair?.[0]?.ti?.headerImage;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-white via-gray-50 to-gray-100 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 text-gray-900 dark:text-white overflow-hidden">
+    <div className="min-h-screen bg-gradient-to-br from-white via-gray-50 to-gray-100 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 text-gray-900 dark:text-gray-100 overflow-hidden">
       <ThemeToggle />
       
       {/* Hero Section with Parallax Effect */}
@@ -165,7 +165,7 @@ export default async function Home() {
           <h2 className="text-2xl sm:text-4xl font-bold text-center mb-4 sm:mb-8 text-gray-900 dark:text-white">
             Resources & Community
           </h2>
-          <p className="text-center text-gray-600 dark:text-gray-300 mb-8 sm:mb-12 max-w-2xl mx-auto text-sm sm:text-lg leading-relaxed">
+          <p className="text-center text-gray-700 dark:text-gray-200 mb-8 sm:mb-12 max-w-2xl mx-auto text-sm sm:text-lg leading-relaxed">
             Join our growing community and explore our comprehensive resources
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-8">
@@ -177,7 +177,7 @@ export default async function Home() {
                 <h3 className="text-xl sm:text-2xl font-bold mb-2 sm:mb-4 text-gray-900 dark:text-white">
                   Investor Pitch
                 </h3>
-                <p className="text-sm sm:text-base text-gray-600 dark:text-gray-300 mb-4 sm:mb-6">
+                <p className="text-sm sm:text-base text-gray-700 dark:text-gray-200 mb-4 sm:mb-6">
                   Explore our comprehensive pitch deck and learn about our vision for revolutionizing the housing market
                 </p>
                 <a
@@ -200,7 +200,7 @@ export default async function Home() {
                 <h3 className="text-xl sm:text-2xl font-bold mb-2 sm:mb-4 text-gray-900 dark:text-white">
                   Join Our Community
                 </h3>
-                <p className="text-sm sm:text-base text-gray-600 dark:text-gray-300 mb-4 sm:mb-6">
+                <p className="text-sm sm:text-base text-gray-700 dark:text-gray-200 mb-4 sm:mb-6">
                   Connect with fellow investors and stay updated with the latest news and developments
                 </p>
                 <a
@@ -224,7 +224,7 @@ export default async function Home() {
           <h2 className="text-2xl sm:text-4xl font-bold text-center mb-3 sm:mb-6 text-gray-900 dark:text-white">
             Your Digital Home 🏠
           </h2>
-          <p className="text-center text-gray-600 dark:text-gray-300 mb-6 sm:mb-12 max-w-2xl mx-auto text-sm sm:text-lg leading-relaxed">
+          <p className="text-center text-gray-700 dark:text-gray-200 mb-6 sm:mb-12 max-w-2xl mx-auto text-sm sm:text-lg leading-relaxed">
             Take a virtual tour of your future home in the crypto world. Visualize your house flipping journey in 3D!
           </p>
           <div className="relative z-20">
@@ -242,8 +242,8 @@ export default async function Home() {
                 {formatNumber(parseFloat(totalSupply))}
               </h3>
             </div>
-            <p className="text-base sm:text-xl mt-1 sm:mt-4 text-gray-600 dark:text-gray-300">Total Supply</p>
-            <p className="text-xs sm:text-base text-gray-500 dark:text-gray-400 mt-2 sm:mt-6">Enough for a whole neighborhood! 🏘️</p>
+            <p className="text-base sm:text-xl mt-1 sm:mt-4 text-gray-700 dark:text-gray-200">Total Supply</p>
+            <p className="text-xs sm:text-base text-gray-600 dark:text-gray-300 mt-2 sm:mt-6">Enough for a whole neighborhood! 🏘️</p>
           </div>
           
           <div className="group bg-white dark:bg-gray-800 p-4 sm:p-10 rounded-lg shadow-lg hover:shadow-xl transition-all transform hover:scale-105">
@@ -252,8 +252,8 @@ export default async function Home() {
                 ${formatNumber(mainPair.liquidity.usd)}
               </h3>
             </div>
-            <p className="text-base sm:text-xl mt-1 sm:mt-4 text-gray-600 dark:text-gray-300">Liquidity</p>
-            <p className="text-xs sm:text-base text-gray-500 dark:text-gray-400 mt-2 sm:mt-6">Solid foundation! 🏗️</p>
+            <p className="text-base sm:text-xl mt-1 sm:mt-4 text-gray-700 dark:text-gray-200">Liquidity</p>
+            <p className="text-xs sm:text-base text-gray-600 dark:text-gray-300 mt-2 sm:mt-6">Solid foundation! 🏗️</p>
           </div>
           
           <div className="group bg-white dark:bg-gray-800 p-4 sm:p-10 rounded-lg shadow-lg hover:shadow-xl transition-all transform hover:scale-105">
@@ -262,8 +262,8 @@ export default async function Home() {
                 {holderCount.toLocaleString()}
               </h3>
             </div>
-            <p className="text-base sm:text-xl mt-1 sm:mt-4 text-gray-600 dark:text-gray-300">Total Holders</p>
-            <p className="text-xs sm:text-base text-gray-500 dark:text-gray-400 mt-2 sm:mt-6">Growing community! 👥</p>
+            <p className="text-base sm:text-xl mt-1 sm:mt-4 text-gray-700 dark:text-gray-200">Total Holders</p>
+            <p className="text-xs sm:text-base text-gray-600 dark:text-gray-300 mt-2 sm:mt-6">Growing community! 👥</p>
           </div>
         </div>
       </div>
@@ -291,7 +291,7 @@ export default async function Home() {
                     href={`https://solscan.io/account/${holder.id}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-xs sm:text-base hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+                    className="text-xs sm:text-base text-gray-700 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
                   >
                     {holder.id === '5Q544fKrFoe6tsEbD7S8EmxGTJYAKtTVhAW5Q5pge4j1' ? 
                       'RAYDIUM' : 
@@ -311,28 +311,28 @@ export default async function Home() {
             <ul className="space-y-2 sm:space-y-4">
               <li className="group/item flex justify-between items-center p-3 sm:p-6 rounded-lg bg-gray-50 dark:bg-gray-700 
                 hover:bg-gray-100 dark:hover:bg-gray-600 transition-all transform hover:translate-x-2">
-                <span className="text-xs sm:text-base text-gray-600 dark:text-gray-300">Founded</span>
-                <span className="text-xs sm:text-base text-gray-900 dark:text-white">{createdAt}</span>
+                <span className="text-xs sm:text-base text-gray-700 dark:text-gray-200">Founded</span>
+                <span className="text-xs sm:text-base text-gray-900 dark:text-gray-100">{createdAt}</span>
               </li>
               <li className="group/item flex justify-between items-center p-3 sm:p-6 rounded-lg bg-gray-50 dark:bg-gray-700 
                 hover:bg-gray-100 dark:hover:bg-gray-600 transition-all transform hover:translate-x-2">
-                <span className="text-xs sm:text-base text-gray-600 dark:text-gray-300">Community Size</span>
-                <span className="text-xs sm:text-base text-gray-900 dark:text-white">{holderCount.toLocaleString()} members</span>
+                <span className="text-xs sm:text-base text-gray-700 dark:text-gray-200">Community Size</span>
+                <span className="text-xs sm:text-base text-gray-900 dark:text-gray-100">{holderCount.toLocaleString()} members</span>
               </li>
               <li className="group/item flex justify-between items-center p-3 sm:p-6 rounded-lg bg-gray-50 dark:bg-gray-700 
                 hover:bg-gray-100 dark:hover:bg-gray-600 transition-all transform hover:translate-x-2">
-                <span className="text-xs sm:text-base text-gray-600 dark:text-gray-300">Market Value</span>
-                <span className="text-xs sm:text-base text-gray-900 dark:text-white">${formatNumber(mainPair.marketCap)}</span>
+                <span className="text-xs sm:text-base text-gray-700 dark:text-gray-200">Market Value</span>
+                <span className="text-xs sm:text-base text-gray-900 dark:text-gray-100">${formatNumber(mainPair.marketCap)}</span>
               </li>
               <li className="group/item flex justify-between items-center p-3 sm:p-6 rounded-lg bg-gray-50 dark:bg-gray-700 
                 hover:bg-gray-100 dark:hover:bg-gray-600 transition-all transform hover:translate-x-2">
-                <span className="text-xs sm:text-base text-gray-600 dark:text-gray-300">Future Value</span>
-                <span className="text-xs sm:text-base text-gray-900 dark:text-white">$50T MC</span>
+                <span className="text-xs sm:text-base text-gray-700 dark:text-gray-200">Future Value</span>
+                <span className="text-xs sm:text-base text-gray-900 dark:text-gray-100">$50T MC</span>
               </li>
               <li className="group/item flex justify-between items-center p-3 sm:p-6 rounded-lg bg-gray-50 dark:bg-gray-700 
                 hover:bg-gray-100 dark:hover:bg-gray-600 transition-all transform hover:translate-x-2">
-                <span className="text-xs sm:text-base text-gray-600 dark:text-gray-300">Price Per $HOUSE at $50T MC</span>
-                <span className="text-xs sm:text-base text-gray-900 dark:text-white">${formatNumber(50000000000000 / parseFloat(totalSupply))}</span>
+                <span className="text-xs sm:text-base text-gray-700 dark:text-gray-200">Price Per $HOUSE at $50T MC</span>
+                <span className="text-xs sm:text-base text-gray-900 dark:text-gray-100">${formatNumber(50000000000000 / parseFloat(totalSupply))}</span>
               </li>
             </ul>
           </div>
@@ -373,7 +373,7 @@ export default async function Home() {
               </a>
             ))
           ) : (
-            <p className="text-gray-500 dark:text-gray-400 text-xs sm:text-base">No social links available</p>
+            <p className="text-gray-600 dark:text-gray-300 text-xs sm:text-base">No social links available</p>
           )}
         </div>
       </footer>

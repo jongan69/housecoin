@@ -146,36 +146,36 @@ export default function TradingStats({ data }: TradingStatsProps) {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
           <div className="bg-white/10 p-4 rounded-lg hover:bg-white/15 transition-all transform hover:scale-105">
-            <h4 className="text-gray-400 mb-2">Volume</h4>
-            <p className="text-2xl font-bold text-white">
+            <h4 className="text-gray-700 dark:text-gray-300 mb-2">Volume</h4>
+            <p className="text-2xl font-bold text-gray-900 dark:text-white">
               {formatNumber(mainPair.volume[selectedTimeframe])}
             </p>
           </div>
 
           <div className="bg-white/10 p-4 rounded-lg hover:bg-white/15 transition-all transform hover:scale-105">
-            <h4 className="text-gray-400 mb-2 text-center">Transactions</h4>
+            <h4 className="text-gray-700 dark:text-gray-300 mb-2 text-center">Transactions</h4>
             <div className="flex gap-4 justify-center">
-              <p className="text-green-400">
+              <p className="text-green-600 dark:text-green-400">
                 {mainPair.txns[selectedTimeframe].buys} Buys
               </p>
-              <p className="text-red-400">
+              <p className="text-red-600 dark:text-red-400">
                 {mainPair.txns[selectedTimeframe].sells} Sells
               </p>
             </div>
           </div>
 
           <div className="bg-white/10 p-4 rounded-lg hover:bg-white/15 transition-all transform hover:scale-105">
-            <h4 className="text-gray-400 mb-2">Price Change</h4>
+            <h4 className="text-gray-700 dark:text-gray-300 mb-2">Price Change</h4>
             <p className={`text-2xl font-bold ${
-              mainPair.priceChange[selectedTimeframe] >= 0 ? 'text-green-400' : 'text-red-400'
+              mainPair.priceChange[selectedTimeframe] >= 0 ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400'
             }`}>
               {mainPair.priceChange[selectedTimeframe].toFixed(2)}%
             </p>
           </div>
 
           <div className="bg-white/10 p-4 rounded-lg hover:bg-white/15 transition-all transform hover:scale-105">
-            <h4 className="text-gray-400 mb-2">Market Cap</h4>
-            <p className="text-2xl font-bold text-white">
+            <h4 className="text-gray-700 dark:text-gray-300 mb-2">Market Cap</h4>
+            <p className="text-2xl font-bold text-gray-900 dark:text-white">
               {formatNumber(mainPair.marketCap)}
             </p>
           </div>
@@ -185,16 +185,16 @@ export default function TradingStats({ data }: TradingStatsProps) {
           <div className="bg-white/10 p-4 rounded-lg">
             <div className="flex justify-between items-center">
               <div>
-                <h4 className="text-gray-400">Liquidity</h4>
-                <p className="text-xl font-bold text-white">{formatNumber(mainPair.liquidity.usd)}</p>
+                <h4 className="text-gray-700 dark:text-gray-300">Liquidity</h4>
+                <p className="text-xl font-bold text-gray-900 dark:text-white">{formatNumber(mainPair.liquidity.usd)}</p>
               </div>
               <div className="text-center">
-                <p className="text-sm text-gray-400">Trading on</p>
+                <p className="text-sm text-gray-700 dark:text-gray-300">Trading on</p>
                 <a 
                   href={mainPair.dexId === 'pumpswap' ? pumpSwapUrl : mainPair.url}
                   target="_blank"
                   rel="noopener noreferrer" 
-                  className="text-lg font-bold text-yellow-400 capitalize hover:text-yellow-300"
+                  className="text-lg font-bold text-blue-600 dark:text-blue-400 capitalize hover:text-blue-700 dark:hover:text-blue-300"
                 >
                   {mainPair.dexId} 🔗
                 </a>
@@ -206,12 +206,12 @@ export default function TradingStats({ data }: TradingStatsProps) {
             <div className="bg-white/10 p-4 rounded-lg">
               <div className="flex justify-between items-center">
                 <div>
-                  <h4 className="text-gray-400">Holders</h4>
-                  <p className="text-xl font-bold text-white">{data.holders.count.toLocaleString()}</p>
+                  <h4 className="text-gray-700 dark:text-gray-300">Holders</h4>
+                  <p className="text-xl font-bold text-gray-900 dark:text-white">{data.holders.count.toLocaleString()}</p>
                 </div>
                 <div className="text-right">
-                  <p className="text-sm text-gray-400">Total Supply</p>
-                  <p className="text-lg font-bold text-yellow-400">
+                  <p className="text-sm text-gray-700 dark:text-gray-300">Total Supply</p>
+                  <p className="text-lg font-bold text-blue-600 dark:text-blue-400">
                     {formatSupply(data.holders.totalSupply)}
                   </p>
                 </div>

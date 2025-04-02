@@ -87,7 +87,7 @@ export default function ContractAddress({ address }: ContractAddressProps) {
         </span>
       </div>
       <div className="absolute right-2 top-1/2 transform -translate-y-1/2 
-        opacity-100 transition-opacity duration-300">
+        opacity-100 transition-opacity duration-300 pb-8">
         {copied ? '✅' : '📋'}
       </div>
 
