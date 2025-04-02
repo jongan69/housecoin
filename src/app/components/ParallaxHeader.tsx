@@ -112,7 +112,7 @@ export default function ParallaxHeader({
     }, []);
 
     return (
-        <div className="relative w-full h-screen  py-18">
+        <div className="relative w-full h-screen">
             {/* Parallax Background */}
             <div
                 ref={headerRef}
@@ -138,10 +138,10 @@ export default function ParallaxHeader({
             <Particles />
 
             {/* Content with Zillow-like styling */}
-            <div className="relative h-full flex flex-col items-center justify-center px-4 z-30">
-                <div className="text-center space-y-3 sm:space-y-8 max-w-4xl mx-auto">
+            <div className="absolute inset-0 flex flex-col items-center justify-center px-4 z-30">
+                <div className="text-center space-y-2 sm:space-y-8 max-w-4xl mx-auto pt-16 sm:pt-32">
                     <div className="relative">
-                        <div className="relative mx-auto mb-2 sm:mb-8 w-20 h-20 sm:w-40 sm:h-40 py-10">
+                        <div className="relative mx-auto mb-1 sm:mb-8 w-16 h-16 sm:w-40 sm:h-40">
                             {tokenInfo.pair?.[0]?.ti?.image && (
                                 <Image
                                     src={tokenInfo.pair[0].ti.image}
