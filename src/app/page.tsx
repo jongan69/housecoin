@@ -161,7 +161,7 @@ export default async function Home() {
         />
 
         {/* Resources Section - Zillow-like */}
-        <div className="container mx-auto px-4 py-12 sm:py-20 relative z-10">
+        <div className="container mx-auto px-4 py-20 sm:py-20 relative z-10">
           <div className="max-w-4xl mx-auto">
             <h2 className="text-2xl sm:text-4xl font-bold text-center mb-4 sm:mb-8 text-gray-900 dark:text-white">
               Resources & Community
