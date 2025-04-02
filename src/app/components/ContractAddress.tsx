@@ -65,7 +65,7 @@ export default function ContractAddress({ address }: ContractAddressProps) {
   return (
     <div
       onClick={copyToClipboard}
-      className={`bg-white/10 p-4 sm:p-4 rounded-lg max-w-2xl mx-auto backdrop-blur-sm mt-6 
+      className={`bg-white/10 p-4 sm:p-4 rounded-lg w-full mx-auto backdrop-blur-sm mt-6 
         cursor-pointer transform transition-all duration-300 active:scale-95 hover:scale-105 
         hover:bg-white/15 relative group ${roaring ? 'animate-shake' : ''}
         touch-manipulation`}

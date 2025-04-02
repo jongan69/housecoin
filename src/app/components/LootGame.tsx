@@ -205,7 +205,7 @@ export default function LootGame() {
   return (
     <div className="w-full max-w-lg mx-auto bg-gradient-to-b from-blue-900/50 to-black/50 p-4 rounded-xl backdrop-blur-sm border border-white/10">
       <div className="text-center mb-4">
-        <h3 className="text-xl font-bold text-blue-400 mb-2">House Hunter Adventure</h3>
+        <h3 className="text-2xl font-bold text-white mb-2 border-b-2 border-white/10 pb-2">House Hunter Adventure</h3>
         <p className="text-sm text-gray-300 mb-2">
           {isMobile ? 'Use the controls below to move the house hunter!' : 'Use arrow keys to move the house hunter and collect housing treasures!'}
         </p>

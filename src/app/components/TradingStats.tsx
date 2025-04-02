@@ -33,6 +33,16 @@ interface TradingStatsProps {
       liquidity: { usd: number; base: number; quote: number };
       marketCap: number;
       url: string;
+      baseToken: {
+        address: string;
+        name: string;
+        symbol: string;
+      };
+      quoteToken: {
+        address: string;
+        name: string;
+        symbol: string;
+      };
     }>;
     ti?: TokenInfo;
     holders?: {
@@ -52,7 +62,8 @@ export default function TradingStats({ data }: TradingStatsProps) {
   const [selectedTimeframe, setSelectedTimeframe] = useState<'m5' | 'h1' | 'h6' | 'h24'>('h24');
   const mainPair = data.pairs[0]; // Using Raydium as main pair
   const tokenInfo = data.ti;
-
+  const contractAddress = mainPair.baseToken.address;
+  const pumpSwapUrl = `https://swap.pump.fun/?input=So11111111111111111111111111111111111111112&output=${contractAddress}`;
   const timeframes = [
     { value: 'm5', label: '5M' },
     { value: 'h1', label: '1H' },
@@ -180,7 +191,7 @@ export default function TradingStats({ data }: TradingStatsProps) {
               <div className="text-center">
                 <p className="text-sm text-gray-400">Trading on</p>
                 <a 
-                  href={mainPair.url}
+                  href={mainPair.dexId === 'pumpswap' ? pumpSwapUrl : mainPair.url}
                   target="_blank"
                   rel="noopener noreferrer" 
                   className="text-lg font-bold text-yellow-400 capitalize hover:text-yellow-300"

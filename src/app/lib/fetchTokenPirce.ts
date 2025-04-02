@@ -1,5 +1,6 @@
 const URL = process.env.NEXT_PUBLIC_API_URL!;
 const OUTPUT_MINT = process.env.NEXT_PUBLIC_CONTRACT_ADDRESS!;
+
 export async function getTokenPrice() {
     try {
       console.log('Fetching token price...');

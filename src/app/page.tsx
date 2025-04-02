@@ -3,6 +3,8 @@ import ContractAddress from './components/ContractAddress';
 import TradingStats from './components/TradingStats';
 import LootGame from './components/LootGame';
 import InteractiveHouse from './components/InteractiveHouse';
+import ThemeToggle from './components/ThemeToggle';
+import ParallaxHeader from './components/ParallaxHeader';
 
 export const dynamic = 'force-dynamic';
 
@@ -63,6 +65,11 @@ interface Pair {
     symbol: string;
     address: string;
   };
+  quoteToken: {
+    name: string;
+    symbol: string;
+    address: string;
+  };
   info: {
     socials: Social[];
   };
@@ -76,6 +83,11 @@ interface TokenInfo {
       createdAt: string;
       image: string;
       headerImage: string;
+    };
+    baseToken: {
+      address: string;
+      name: string;
+      symbol: string;
     };
     holders: {
       count: number;
@@ -131,247 +143,88 @@ export default async function Home() {
   const holderCount = tokenInfo.pair?.[0]?.holders?.count || 0;
   const totalSupply = tokenInfo.pair?.[0]?.holders?.totalSupply || '0';
   const topHolders = tokenInfo.pair?.[0]?.holders?.holders.slice(0, 5) || [];
-  const description = tokenInfo.pair?.[0]?.ti?.description || '';
   const createdAt = tokenInfo.pair?.[0]?.ti?.createdAt ? new Date(tokenInfo.pair[0].ti.createdAt).toLocaleDateString() : '';
   const headerImage = tokenInfo.pair?.[0]?.ti?.headerImage;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-emerald-900/90 via-black to-indigo-900/90 text-white overflow-hidden">
+    <div className="min-h-screen bg-gradient-to-br from-white via-gray-50 to-gray-100 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 text-gray-900 dark:text-white overflow-hidden">
+      <ThemeToggle />
+      
       {/* Hero Section with Parallax Effect */}
-      <div className="relative w-full h-screen overflow-hidden pb-4 sm:pb-8">
-        {/* Animated Background */}
-        <div className="absolute inset-0 w-full h-full">
-          <div className="relative w-full h-full">
-            <Image 
-              src={headerImage || '/placeholder-header.jpg'} 
-              alt="Token Header"
-              fill
-              priority
-              className="object-cover w-full h-full transform scale-105 animate-subtle-zoom"
-              sizes="100vw"
-              style={{ objectPosition: 'center 20%' }}
-            />
-            {/* Enhanced overlay with multiple gradient layers */}
-            <div className="absolute inset-0 w-full h-full bg-gradient-to-b from-black/90 via-black/80 to-black/90"></div>
-            <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-emerald-500/20 via-transparent to-indigo-500/20"></div>
-            <div className="absolute inset-0 w-full h-full bg-[radial-gradient(circle_at_center,transparent_0%,black_100%)]"></div>
-          </div>
-        </div>
-        
-        {/* Animated Grid Pattern */}
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute inset-0" style={{
-            backgroundImage: `linear-gradient(to right, rgba(255,255,255,0.1) 1px, transparent 1px),
-                             linear-gradient(to bottom, rgba(255,255,255,0.1) 1px, transparent 1px)`,
-            backgroundSize: '50px 50px',
-            animation: 'gridMove 20s linear infinite'
-          }}></div>
-        </div>
-        
-        {/* Floating Elements - Enhanced */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div className="absolute top-20 left-10 w-20 h-20 bg-emerald-500/10 rounded-full blur-3xl animate-float"></div>
-          <div className="absolute top-40 right-20 w-32 h-32 bg-indigo-500/10 rounded-full blur-3xl animate-float-delayed"></div>
-          <div className="absolute bottom-20 left-1/2 w-24 h-24 bg-teal-500/10 rounded-full blur-3xl animate-float-more-delayed"></div>
-          <div className="absolute top-1/2 right-1/3 w-40 h-40 bg-cyan-500/10 rounded-full blur-3xl animate-float-slow"></div>
-          <div className="absolute bottom-1/3 left-1/4 w-36 h-36 bg-blue-500/10 rounded-full blur-3xl animate-float-slower"></div>
-        </div>
+      <ParallaxHeader 
+        imageUrl={headerImage}
+        tokenInfo={tokenInfo}
+        mainPair={mainPair}
+        contractAddress={CONTRACT_ADDRESS}
+        moonshotLink={MOONSHOT_LINK}
+      />
 
-        {/* Animated Particles */}
-        <div className="absolute inset-0 pointer-events-none">
-          {[...Array(20)].map((_, i) => (
-            <div
-              key={i}
-              className="absolute w-1 h-1 bg-white/20 rounded-full"
-              style={{
-                left: `${Math.random() * 100}%`,
-                top: `${Math.random() * 100}%`,
-                animation: `particleFloat ${5 + Math.random() * 10}s infinite`,
-                animationDelay: `${Math.random() * 5}s`
-              }}
-            />
-          ))}
-        </div>
-
-        {/* Main Content - Enhanced */}
-        <div className="relative h-full flex flex-col items-center justify-center px-4 z-10">
-          <div className="text-center space-y-3 sm:space-y-8 max-w-4xl mx-auto">
-            <div className="relative">
-              <div className="absolute -inset-4 bg-gradient-to-r from-emerald-500/10 to-teal-500/10 rounded-full blur-2xl animate-pulse-slow"></div>
-              <div className="relative mx-auto mb-2 sm:mb-8 w-20 h-20 sm:w-40 sm:h-40 animate-float-subtle">
-                {tokenInfo.pair?.[0]?.ti?.image && (
-                  <Image 
-                    src={tokenInfo.pair?.[0]?.ti?.image} 
-                    alt="Token Logo" 
-                    fill
-                    className="rounded-full object-cover border-4 border-emerald-500/30 shadow-lg shadow-emerald-500/10"
-                  />
-                )}
-              </div>
-            </div>
-            
-            <h1 className="text-3xl sm:text-7xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-teal-400 to-indigo-400 animate-title-glow">
-              HOUSECOIN 
-            </h1>
-            
-            <div className="space-y-2 sm:space-y-6">
-              <p className="text-base sm:text-2xl font-semibold text-emerald-400 animate-fade-in-up">
-                Flipping the Housing Market, One $HOUSE at a Time 🏗️
-              </p>
-              <p className="text-sm sm:text-lg text-gray-300 max-w-2xl mx-auto leading-relaxed animate-fade-in-up-delayed">
-                {description}
-              </p>
-              <div className="text-sm sm:text-lg text-gray-300 max-w-2xl mx-auto leading-relaxed animate-fade-in-up-delayed">
-                <ContractAddress address={CONTRACT_ADDRESS} />
-              </div>
-            </div>
-
-            {/* Price Display - Enhanced */}
-            <div className="bg-white/5 backdrop-blur-lg rounded-xl sm:rounded-3xl p-3 sm:p-8 shadow-2xl border border-white/10 transform hover:scale-105 transition-all duration-300 animate-fade-in-up">
-              <p className="text-2xl sm:text-5xl font-bold text-emerald-400 mb-1 sm:mb-4 animate-pulse-slow">
-                ${Number(mainPair?.priceUsd || 0).toFixed(6)} USD
-              </p>
-              <div className="flex flex-col sm:flex-row justify-center gap-1 sm:gap-6 text-xs sm:text-sm">
-                <span className="text-green-400 flex items-center gap-2">
-                  <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
-                  {mainPair.txns.h24.buys} Buys (24h)
-                </span>
-                <span className="text-red-400 flex items-center gap-2">
-                  <span className="w-2 h-2 bg-red-400 rounded-full animate-pulse"></span>
-                  {mainPair.txns.h24.sells} Sells (24h)
-                </span>
-              </div>
-            </div>
-
-            {/* Action Buttons - Enhanced */}
-            <div className="flex flex-col sm:flex-row justify-center gap-2 sm:gap-4 mt-4 sm:mt-12 mb-16 sm:mb-0 animate-fade-in-up">
-              <a
-                href={`https://raydium.io/swap/?inputMint=sol&outputMint=${CONTRACT_ADDRESS}&referrer=9yA9LPCRv8p8V8ZvJVYErrVGWbwqAirotDTQ8evRxE5N`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group relative px-4 sm:px-8 py-2 sm:py-4 bg-gradient-to-r from-emerald-500 to-teal-500 rounded-full text-sm sm:text-lg font-bold 
-                  hover:opacity-90 transition-all transform hover:scale-105 hover:rotate-1 overflow-hidden w-full sm:w-auto"
-              >
-                <span className="relative z-10">Buy Your First House 🏠</span>
-                <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/0 via-white/20 to-emerald-500/0 
-                  translate-x-[-200%] group-hover:translate-x-[200%] transition-transform duration-1000"></div>
-              </a>
-              <a
-                href={`https://t.me/bonkbot_bot?start=ref_jyzn2_ca_${CONTRACT_ADDRESS}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group relative px-4 sm:px-8 py-2 sm:py-4 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-full text-sm sm:text-lg font-bold 
-                  hover:opacity-90 transition-all transform hover:scale-105 hover:rotate-1 overflow-hidden w-full sm:w-auto"
-              >
-                <span className="relative z-10">Quick Flip with BONKbot 🤖</span>
-                <div className="absolute inset-0 bg-gradient-to-r from-indigo-500/0 via-white/20 to-indigo-500/0 
-                  translate-x-[-200%] group-hover:translate-x-[200%] transition-transform duration-1000"></div>
-              </a>
-              <a
-                href={`https://phantom.app/tokens/solana/${CONTRACT_ADDRESS}?referralId=m0ezk5sfqrs`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group relative px-4 sm:px-8 py-2 sm:py-4 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-full text-sm sm:text-lg font-bold 
-                  hover:opacity-90 transition-all transform hover:scale-105 hover:rotate-1 overflow-hidden w-full sm:w-auto"
-              >
-                <span className="relative z-10">Store in Your Wallet 👻</span>
-                <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/0 via-white/20 to-cyan-500/0 
-                  translate-x-[-200%] group-hover:translate-x-[200%] transition-transform duration-1000"></div>
-              </a>
-              <a
-                href={MOONSHOT_LINK}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group relative px-4 sm:px-8 py-2 sm:py-4 bg-gradient-to-r from-teal-500 to-emerald-500 rounded-full text-sm sm:text-lg font-bold 
-                  hover:opacity-90 transition-all transform hover:scale-105 hover:rotate-1 overflow-hidden w-full sm:w-auto"
-              >
-                <span className="relative z-10">Moon Shot 🚀</span>
-                <div className="absolute inset-0 bg-gradient-to-r from-teal-500/0 via-white/20 to-teal-500/0 
-                  translate-x-[-200%] group-hover:translate-x-[200%] transition-transform duration-1000"></div>
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Resources Section - New Professional Section */}
+      {/* Resources Section - Zillow-like */}
       <div className="container mx-auto px-4 py-12 sm:py-20 relative z-10">
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-2xl sm:text-4xl font-bold text-center mb-4 sm:mb-8 text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-teal-400">
+          <h2 className="text-2xl sm:text-4xl font-bold text-center mb-4 sm:mb-8 text-gray-900 dark:text-white">
             Resources & Community
           </h2>
-          <p className="text-center text-gray-300 mb-8 sm:mb-12 max-w-2xl mx-auto text-sm sm:text-lg leading-relaxed">
+          <p className="text-center text-gray-600 dark:text-gray-300 mb-8 sm:mb-12 max-w-2xl mx-auto text-sm sm:text-lg leading-relaxed">
             Join our growing community and explore our comprehensive resources
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-8">
-            <div className="group bg-white/5 p-6 sm:p-8 rounded-2xl sm:rounded-3xl backdrop-blur-lg hover:bg-white/10 transition-all transform hover:scale-105 
-              border border-white/10 shadow-2xl hover:shadow-purple-500/20">
+            <div className="group bg-white dark:bg-gray-800 p-6 sm:p-8 rounded-lg shadow-lg hover:shadow-xl transition-all transform hover:scale-105">
               <div className="flex flex-col items-center text-center">
-                <div className="w-16 h-16 sm:w-20 sm:h-20 mb-4 sm:mb-6 rounded-full bg-gradient-to-br from-purple-500/20 to-pink-500/20 flex items-center justify-center">
+                <div className="w-16 h-16 sm:w-20 sm:h-20 mb-4 sm:mb-6 rounded-full bg-blue-100 dark:bg-blue-900 flex items-center justify-center">
                   <span className="text-2xl sm:text-3xl">📊</span>
                 </div>
-                <h3 className="text-xl sm:text-2xl font-bold mb-2 sm:mb-4 text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400">
+                <h3 className="text-xl sm:text-2xl font-bold mb-2 sm:mb-4 text-gray-900 dark:text-white">
                   Investor Pitch
                 </h3>
-                <p className="text-sm sm:text-base text-gray-300 mb-4 sm:mb-6">
+                <p className="text-sm sm:text-base text-gray-600 dark:text-gray-300 mb-4 sm:mb-6">
                   Explore our comprehensive pitch deck and learn about our vision for revolutionizing the housing market
                 </p>
                 <a
                   href="https://slidesgpt.com/presentation/8Lmiwtw8hoLE9QyJaWOm?d=8Lmiwtw8hoLE9QyJaWOm"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group/btn relative px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full text-sm sm:text-lg font-bold 
-                    hover:opacity-90 transition-all transform hover:scale-105 hover:rotate-1 overflow-hidden w-full sm:w-auto"
+                  className="group/btn relative px-6 sm:px-8 py-3 sm:py-4 bg-blue-600 text-white rounded-lg font-bold text-sm sm:text-lg 
+                    hover:bg-blue-700 transition-all transform hover:scale-105"
                 >
                   <span className="relative z-10">View Pitch Deck</span>
-                  <div className="absolute inset-0 bg-gradient-to-r from-purple-500/0 via-white/20 to-purple-500/0 
-                    translate-x-[-200%] group-hover/btn:translate-x-[200%] transition-transform duration-1000"></div>
                 </a>
               </div>
             </div>
 
-            <div className="group bg-white/5 p-6 sm:p-8 rounded-2xl sm:rounded-3xl backdrop-blur-lg hover:bg-white/10 transition-all transform hover:scale-105 
-              border border-white/10 shadow-2xl hover:shadow-orange-500/20">
+            <div className="group bg-white dark:bg-gray-800 p-6 sm:p-8 rounded-lg shadow-lg hover:shadow-xl transition-all transform hover:scale-105">
               <div className="flex flex-col items-center text-center">
-                <div className="w-16 h-16 sm:w-20 sm:h-20 mb-4 sm:mb-6 rounded-full bg-gradient-to-br from-orange-500/20 to-red-500/20 flex items-center justify-center">
+                <div className="w-16 h-16 sm:w-20 sm:h-20 mb-4 sm:mb-6 rounded-full bg-green-100 dark:bg-green-900 flex items-center justify-center">
                   <span className="text-2xl sm:text-3xl">🏘️</span>
                 </div>
-                <h3 className="text-xl sm:text-2xl font-bold mb-2 sm:mb-4 text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-red-400">
+                <h3 className="text-xl sm:text-2xl font-bold mb-2 sm:mb-4 text-gray-900 dark:text-white">
                   Join Our Community
                 </h3>
-                <p className="text-sm sm:text-base text-gray-300 mb-4 sm:mb-6">
+                <p className="text-sm sm:text-base text-gray-600 dark:text-gray-300 mb-4 sm:mb-6">
                   Connect with fellow investors and stay updated with the latest news and developments
                 </p>
                 <a
                   href="https://x.com/i/communities/1906719518350569767"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group/btn relative px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-orange-500 to-red-500 rounded-full text-sm sm:text-lg font-bold 
-                    hover:opacity-90 transition-all transform hover:scale-105 hover:rotate-1 overflow-hidden w-full sm:w-auto"
+                  className="group/btn relative px-6 sm:px-8 py-3 sm:py-4 bg-green-600 text-white rounded-lg font-bold text-sm sm:text-lg 
+                    hover:bg-green-700 transition-all transform hover:scale-105"
                 >
                   <span className="relative z-10">Join Now</span>
-                  <div className="absolute inset-0 bg-gradient-to-r from-orange-500/0 via-white/20 to-orange-500/0 
-                    translate-x-[-200%] group-hover/btn:translate-x-[200%] transition-transform duration-1000"></div>
                 </a>
               </div>
             </div>
           </div>
         </div>
-
-        {/* Scroll Indicator - Moved to bottom of Resources section */}
-        <div className="flex flex-col items-center gap-2 mt-16">
-          <span className="text-xs text-white/50 animate-pulse z-10">1 HOUSE = 1 $HOUSE</span>
-          <span className="text-xl sm:text-3xl animate-house-bounce">🏠</span>
-        </div>
       </div>
 
-      {/* Interactive 3D House - More prominent */}
+      {/* Interactive 3D House - Zillow-like */}
       <div className="container mx-auto px-4 relative z-10">
-        <div className="bg-white/5 rounded-xl sm:rounded-3xl p-4 sm:p-12 border border-white/10 shadow-2xl">
-          <h2 className="text-2xl sm:text-4xl font-bold text-center mb-3 sm:mb-6 text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-teal-400">
+        <div className="bg-white dark:bg-gray-800 rounded-lg p-4 sm:p-12 shadow-lg">
+          <h2 className="text-2xl sm:text-4xl font-bold text-center mb-3 sm:mb-6 text-gray-900 dark:text-white">
             Your Digital Home 🏠
           </h2>
-          <p className="text-center text-gray-300 mb-6 sm:mb-12 max-w-2xl mx-auto text-sm sm:text-lg leading-relaxed">
+          <p className="text-center text-gray-600 dark:text-gray-300 mb-6 sm:mb-12 max-w-2xl mx-auto text-sm sm:text-lg leading-relaxed">
             Take a virtual tour of your future home in the crypto world. Visualize your house flipping journey in 3D!
           </p>
           <div className="relative z-20">
@@ -380,129 +233,120 @@ export default async function Home() {
         </div>
       </div>
 
-      {/* Stats Section - More elegant */}
+      {/* Stats Section - Zillow-like */}
       <div className="container mx-auto px-4 py-8 sm:py-24 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-3 sm:gap-8">
-          <div className="group bg-white/5 p-4 sm:p-10 rounded-xl sm:rounded-3xl backdrop-blur-lg hover:bg-white/10 transition-all transform hover:scale-105 
-            border border-white/10 shadow-2xl hover:shadow-emerald-500/20">
+          <div className="group bg-white dark:bg-gray-800 p-4 sm:p-10 rounded-lg shadow-lg hover:shadow-xl transition-all transform hover:scale-105">
             <div className="relative">
-              <div className="absolute -inset-4 bg-gradient-to-r from-emerald-500/10 to-teal-500/10 rounded-full blur-xl opacity-0 
-                group-hover:opacity-100 transition-opacity"></div>
-              <h3 className="text-2xl sm:text-4xl font-bold text-emerald-400 relative">
+              <h3 className="text-2xl sm:text-4xl font-bold text-gray-900 dark:text-white relative">
                 {formatNumber(parseFloat(totalSupply))}
               </h3>
             </div>
-            <p className="text-base sm:text-xl mt-1 sm:mt-4">Total Supply</p>
-            <p className="text-xs sm:text-base text-gray-400 mt-2 sm:mt-6">Enough for a whole neighborhood! 🏘️</p>
+            <p className="text-base sm:text-xl mt-1 sm:mt-4 text-gray-600 dark:text-gray-300">Total Supply</p>
+            <p className="text-xs sm:text-base text-gray-500 dark:text-gray-400 mt-2 sm:mt-6">Enough for a whole neighborhood! 🏘️</p>
           </div>
           
-          <div className="group bg-white/5 p-4 sm:p-10 rounded-xl sm:rounded-3xl backdrop-blur-lg hover:bg-white/10 transition-all transform hover:scale-105 
-            border border-white/10 shadow-2xl hover:shadow-indigo-500/20">
+          <div className="group bg-white dark:bg-gray-800 p-4 sm:p-10 rounded-lg shadow-lg hover:shadow-xl transition-all transform hover:scale-105">
             <div className="relative">
-              <div className="absolute -inset-4 bg-gradient-to-r from-indigo-500/10 to-purple-500/10 rounded-full blur-xl opacity-0 
-                group-hover:opacity-100 transition-opacity"></div>
-              <h3 className="text-2xl sm:text-4xl font-bold text-indigo-400 relative">
+              <h3 className="text-2xl sm:text-4xl font-bold text-gray-900 dark:text-white relative">
                 ${formatNumber(mainPair.liquidity.usd)}
               </h3>
             </div>
-            <p className="text-base sm:text-xl mt-1 sm:mt-4">Liquidity</p>
-            <p className="text-xs sm:text-base text-gray-400 mt-2 sm:mt-6">Solid foundation! 🏗️</p>
+            <p className="text-base sm:text-xl mt-1 sm:mt-4 text-gray-600 dark:text-gray-300">Liquidity</p>
+            <p className="text-xs sm:text-base text-gray-500 dark:text-gray-400 mt-2 sm:mt-6">Solid foundation! 🏗️</p>
           </div>
           
-          <div className="group bg-white/5 p-4 sm:p-10 rounded-xl sm:rounded-3xl backdrop-blur-lg hover:bg-white/10 transition-all transform hover:scale-105 
-            border border-white/10 shadow-2xl hover:shadow-cyan-500/20">
+          <div className="group bg-white dark:bg-gray-800 p-4 sm:p-10 rounded-lg shadow-lg hover:shadow-xl transition-all transform hover:scale-105">
             <div className="relative">
-              <div className="absolute -inset-4 bg-gradient-to-r from-cyan-500/10 to-blue-500/10 rounded-full blur-xl opacity-0 
-                group-hover:opacity-100 transition-opacity"></div>
-              <h3 className="text-2xl sm:text-4xl font-bold text-cyan-400 relative">
+              <h3 className="text-2xl sm:text-4xl font-bold text-gray-900 dark:text-white relative">
                 {holderCount.toLocaleString()}
               </h3>
             </div>
-            <p className="text-base sm:text-xl mt-1 sm:mt-4">Total Holders</p>
-            <p className="text-xs sm:text-base text-gray-400 mt-2 sm:mt-6">Growing community! 👥</p>
+            <p className="text-base sm:text-xl mt-1 sm:mt-4 text-gray-600 dark:text-gray-300">Total Holders</p>
+            <p className="text-xs sm:text-base text-gray-500 dark:text-gray-400 mt-2 sm:mt-6">Growing community! 👥</p>
           </div>
         </div>
       </div>
 
-      {/* Trading Stats - More refined */}
+      {/* Trading Stats - Zillow-like */}
       <div className="container mx-auto px-4 py-8 sm:py-24 relative z-10">
-        <div className="bg-white/5 rounded-xl sm:rounded-3xl p-4 sm:p-12 border border-white/10 shadow-2xl">
+        <div className="bg-white dark:bg-gray-800 rounded-lg p-4 sm:p-12 shadow-lg">
           <TradingStats data={tokenInfo} />
         </div>
       </div>
 
-      {/* Distribution Section - More elegant */}
+      {/* Distribution Section - Zillow-like */}
       <div className="container mx-auto px-4 py-8 sm:py-24 relative z-10">
-        <h2 className="text-2xl sm:text-4xl font-bold text-center mb-6 sm:mb-16 text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-teal-400">
+        <h2 className="text-2xl sm:text-4xl font-bold text-center mb-6 sm:mb-16 text-gray-900 dark:text-white">
           HOUSENOMICS
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-12">
-          <div className="group bg-white/5 p-4 sm:p-10 rounded-xl sm:rounded-3xl backdrop-blur-lg hover:bg-white/10 transition-all transform hover:scale-105 
-            border border-white/10 shadow-2xl">
-            <h3 className="text-lg sm:text-2xl font-bold mb-3 sm:mb-8 text-emerald-400">Top Landlords</h3>
+          <div className="group bg-white dark:bg-gray-800 p-4 sm:p-10 rounded-lg shadow-lg hover:shadow-xl transition-all transform hover:scale-105">
+            <h3 className="text-lg sm:text-2xl font-bold mb-3 sm:mb-8 text-gray-900 dark:text-white">Top Landlords</h3>
             <ul className="space-y-2 sm:space-y-4">
               {topHolders.map((holder, index) => (
-                <li key={index} className="group/item flex justify-between items-center p-3 sm:p-6 rounded-lg sm:rounded-2xl bg-white/5 
-                  hover:bg-white/10 transition-all transform hover:translate-x-2">
+                <li key={index} className="group/item flex justify-between items-center p-3 sm:p-6 rounded-lg bg-gray-50 dark:bg-gray-700 
+                  hover:bg-gray-100 dark:hover:bg-gray-600 transition-all transform hover:translate-x-2">
                   <a 
                     href={`https://solscan.io/account/${holder.id}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-xs sm:text-base hover:text-emerald-400 transition-colors"
+                    className="text-xs sm:text-base hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
                   >
                     {holder.id === '5Q544fKrFoe6tsEbD7S8EmxGTJYAKtTVhAW5Q5pge4j1' ? 
                       'RAYDIUM' : 
+                      holder.id === 'Gj5t6KjTw3gWW7SrMHEi1ojCkaYHyvLwb17gktf96HNH' ?
+                      'Pump.fun AMM' :
                       `${holder.id.slice(0, 8)}...${holder.id.slice(-4)}`
                     }
                   </a>
-                  <span className="text-xs sm:text-base text-emerald-400 font-semibold">{holder.percentage.toFixed(2)}%</span>
+                  <span className="text-xs sm:text-base text-gray-900 dark:text-white font-semibold">{holder.percentage.toFixed(2)}%</span>
                 </li>
               ))}
             </ul>
           </div>
           
-          <div className="group bg-white/5 p-4 sm:p-10 rounded-xl sm:rounded-3xl backdrop-blur-lg hover:bg-white/10 transition-all transform hover:scale-105 
-            border border-white/10 shadow-2xl">
-            <h3 className="text-lg sm:text-2xl font-bold mb-3 sm:mb-8 text-emerald-400">Housing Market Analysis</h3>
+          <div className="group bg-white dark:bg-gray-800 p-4 sm:p-10 rounded-lg shadow-lg hover:shadow-xl transition-all transform hover:scale-105">
+            <h3 className="text-lg sm:text-2xl font-bold mb-3 sm:mb-8 text-gray-900 dark:text-white">Housing Market Analysis</h3>
             <ul className="space-y-2 sm:space-y-4">
-              <li className="group/item flex justify-between items-center p-3 sm:p-6 rounded-lg sm:rounded-2xl bg-white/5 
-                hover:bg-white/10 transition-all transform hover:translate-x-2">
-                <span className="text-xs sm:text-base">Founded</span>
-                <span className="text-xs sm:text-base text-emerald-400">{createdAt}</span>
+              <li className="group/item flex justify-between items-center p-3 sm:p-6 rounded-lg bg-gray-50 dark:bg-gray-700 
+                hover:bg-gray-100 dark:hover:bg-gray-600 transition-all transform hover:translate-x-2">
+                <span className="text-xs sm:text-base text-gray-600 dark:text-gray-300">Founded</span>
+                <span className="text-xs sm:text-base text-gray-900 dark:text-white">{createdAt}</span>
               </li>
-              <li className="group/item flex justify-between items-center p-3 sm:p-6 rounded-lg sm:rounded-2xl bg-white/5 
-                hover:bg-white/10 transition-all transform hover:translate-x-2">
-                <span className="text-xs sm:text-base">Community Size</span>
-                <span className="text-xs sm:text-base text-emerald-400">{holderCount.toLocaleString()} members</span>
+              <li className="group/item flex justify-between items-center p-3 sm:p-6 rounded-lg bg-gray-50 dark:bg-gray-700 
+                hover:bg-gray-100 dark:hover:bg-gray-600 transition-all transform hover:translate-x-2">
+                <span className="text-xs sm:text-base text-gray-600 dark:text-gray-300">Community Size</span>
+                <span className="text-xs sm:text-base text-gray-900 dark:text-white">{holderCount.toLocaleString()} members</span>
               </li>
-              <li className="group/item flex justify-between items-center p-3 sm:p-6 rounded-lg sm:rounded-2xl bg-white/5 
-                hover:bg-white/10 transition-all transform hover:translate-x-2">
-                <span className="text-xs sm:text-base">Market Value</span>
-                <span className="text-xs sm:text-base text-emerald-400">${formatNumber(mainPair.marketCap)}</span>
+              <li className="group/item flex justify-between items-center p-3 sm:p-6 rounded-lg bg-gray-50 dark:bg-gray-700 
+                hover:bg-gray-100 dark:hover:bg-gray-600 transition-all transform hover:translate-x-2">
+                <span className="text-xs sm:text-base text-gray-600 dark:text-gray-300">Market Value</span>
+                <span className="text-xs sm:text-base text-gray-900 dark:text-white">${formatNumber(mainPair.marketCap)}</span>
               </li>
-              <li className="group/item flex justify-between items-center p-3 sm:p-6 rounded-lg sm:rounded-2xl bg-white/5 
-                hover:bg-white/10 transition-all transform hover:translate-x-2">
-                <span className="text-xs sm:text-base">Future Value</span>
-                <span className="text-xs sm:text-base text-emerald-400">$50T MC</span>
+              <li className="group/item flex justify-between items-center p-3 sm:p-6 rounded-lg bg-gray-50 dark:bg-gray-700 
+                hover:bg-gray-100 dark:hover:bg-gray-600 transition-all transform hover:translate-x-2">
+                <span className="text-xs sm:text-base text-gray-600 dark:text-gray-300">Future Value</span>
+                <span className="text-xs sm:text-base text-gray-900 dark:text-white">$50T MC</span>
               </li>
-              <li className="group/item flex justify-between items-center p-3 sm:p-6 rounded-lg sm:rounded-2xl bg-white/5 
-                hover:bg-white/10 transition-all transform hover:translate-x-2">
-                <span className="text-xs sm:text-base">Price Per $HOUSE at $50T MC</span>
-                <span className="text-xs sm:text-base text-emerald-400">${formatNumber(50000000000000 / parseFloat(totalSupply))}</span>
+              <li className="group/item flex justify-between items-center p-3 sm:p-6 rounded-lg bg-gray-50 dark:bg-gray-700 
+                hover:bg-gray-100 dark:hover:bg-gray-600 transition-all transform hover:translate-x-2">
+                <span className="text-xs sm:text-base text-gray-600 dark:text-gray-300">Price Per $HOUSE at $50T MC</span>
+                <span className="text-xs sm:text-base text-gray-900 dark:text-white">${formatNumber(50000000000000 / parseFloat(totalSupply))}</span>
               </li>
             </ul>
           </div>
         </div>
       </div>
 
-      {/* Mini Game Section - More prominent */}
+      {/* Mini Game Section - Zillow-like */}
       <div className="container mx-auto px-4 py-8 sm:py-24 relative z-10">
-        <div className="bg-white/5 rounded-xl sm:rounded-3xl p-4 sm:p-12 border border-white/10 shadow-2xl">
+        <div className="bg-white dark:bg-gray-800 rounded-lg p-4 sm:p-12 shadow-lg">
           <LootGame />
         </div>
       </div>
 
-      {/* Footer - More refined */}
+      {/* Footer - Zillow-like */}
       <footer className="container mx-auto px-4 py-6 sm:py-12 relative z-10">
         <div className="flex flex-col sm:flex-row justify-center gap-2 sm:gap-6">
           {socialLinks.length > 0 ? (
@@ -512,10 +356,10 @@ export default async function Home() {
                 href={social.url} 
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group relative px-4 sm:px-8 py-2 sm:py-4 bg-white/5 rounded-full backdrop-blur-lg hover:bg-white/10 
-                  transition-all transform hover:scale-105 hover:rotate-1 border border-white/10 overflow-hidden w-full sm:w-auto"
+                className="group relative px-4 sm:px-8 py-2 sm:py-4 bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white rounded-lg font-medium text-sm sm:text-base 
+                  hover:bg-gray-200 dark:hover:bg-gray-700 transition-all transform hover:scale-105"
               >
-                <span className="relative z-10 flex items-center justify-center gap-2 text-xs sm:text-base">
+                <span className="relative z-10 flex items-center justify-center gap-2">
                   {social.type === 'twitter' ? (
                     <>
                       <span>𝕏</span>
@@ -526,12 +370,10 @@ export default async function Home() {
                   )}
                   <span>🏠</span>
                 </span>
-                <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/0 via-white/20 to-emerald-500/0 
-                  translate-x-[-200%] group-hover:translate-x-[200%] transition-transform duration-1000 opacity-0 group-hover:opacity-100"></div>
               </a>
             ))
           ) : (
-            <p className="text-gray-400 text-xs sm:text-base">No social links available</p>
+            <p className="text-gray-500 dark:text-gray-400 text-xs sm:text-base">No social links available</p>
           )}
         </div>
       </footer>
