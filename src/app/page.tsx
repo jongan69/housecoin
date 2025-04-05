@@ -5,6 +5,7 @@ import LootGame from './components/LootGame';
 import InteractiveHouse from './components/InteractiveHouse';
 import ThemeToggle from './components/ThemeToggle';
 import ParallaxHeader from './components/ParallaxHeader';
+import InstagramEmbed from './components/InstagramEmbed';
 
 export const dynamic = 'force-dynamic';
 
@@ -199,20 +200,23 @@ export default async function Home() {
                     <span className="text-2xl sm:text-3xl">🏘️</span>
                   </div>
                   <h3 className="text-xl sm:text-2xl font-bold mb-2 sm:mb-4 text-gray-900 dark:text-white">
-                    Join Our Community
+                    Community Hub
                   </h3>
                   <p className="text-sm sm:text-base text-gray-700 dark:text-gray-200 mb-4 sm:mb-6">
-                    Connect with fellow investors and stay updated with the latest news and developments
+                    Connect with our community and stay updated with the latest news and developments
                   </p>
                   <a
                     href="https://x.com/i/communities/1906719518350569767"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="group/btn relative px-6 sm:px-8 py-3 sm:py-4 bg-green-600 text-white rounded-lg font-bold text-sm sm:text-lg 
-                      hover:bg-green-700 transition-all transform hover:scale-105"
+                      hover:bg-green-700 transition-all transform hover:scale-105 mb-6"
                   >
-                    <span className="relative z-10">Join Now</span>
+                    <span className="relative z-10">Join X Community</span>
                   </a>
+                  <div className="w-full">
+                    <InstagramEmbed />
+                  </div>
                 </div>
               </div>
             </div>
