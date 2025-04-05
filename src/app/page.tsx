@@ -1,5 +1,4 @@
-import Image from "next/image";
-import ContractAddress from './components/ContractAddress';
+
 import TradingStats from './components/TradingStats';
 import LootGame from './components/LootGame';
 import InteractiveHouse from './components/InteractiveHouse';
@@ -120,13 +119,13 @@ export default async function Home() {
   // Get the pair with highest liquidity, with fallback for empty data
   const mainPair = tokenInfo.pairs && tokenInfo.pairs.length > 0
     ? tokenInfo.pairs.reduce((max, pair) => {
-        // Skip pairs without liquidity data
-        if (!pair.liquidity?.usd) return max;
-        if (!max.liquidity?.usd) return pair;
-        return pair.liquidity.usd > max.liquidity.usd ? pair : max;
-      }, tokenInfo.pairs[0])
+      // Skip pairs without liquidity data
+      if (!pair.liquidity?.usd) return max;
+      if (!max.liquidity?.usd) return pair;
+      return pair.liquidity.usd > max.liquidity.usd ? pair : max;
+    }, tokenInfo.pairs[0])
     : null;
-  
+
   // Get social links from the main pair
   const socialLinks = mainPair?.info?.socials || [];
 
@@ -154,9 +153,9 @@ export default async function Home() {
     <div className="min-h-screen bg-gradient-to-br from-white via-gray-50 to-gray-100 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 text-gray-900 dark:text-gray-100">
       <div className="relative overflow-hidden">
         <ThemeToggle />
-        
+
         {/* Hero Section with Parallax Effect */}
-        <ParallaxHeader 
+        <ParallaxHeader
           imageUrl={headerImage}
           tokenInfo={tokenInfo}
           mainPair={mainPair}
@@ -223,6 +222,21 @@ export default async function Home() {
           </div>
         </div>
 
+        {/* Interactive 3D House - Zillow-like */}
+        <div className="container mx-auto px-4 relative z-10">
+          <div className="bg-white dark:bg-gray-800 rounded-lg p-4 sm:p-12 shadow-lg">
+            <h2 className="text-2xl sm:text-4xl font-bold text-center mb-3 sm:mb-6 text-gray-900 dark:text-white">
+              Your Digital Home 🏠
+            </h2>
+            <p className="text-center text-gray-700 dark:text-gray-200 mb-6 sm:mb-12 max-w-2xl mx-auto text-sm sm:text-lg leading-relaxed">
+              Take a virtual tour of your future home in the crypto world. Visualize your house flipping journey in 3D!
+            </p>
+            <div className="relative z-20">
+              <InteractiveHouse />
+            </div>
+          </div>
+        </div>
+
         {/* Instagram Feed Section */}
         <div className="container mx-auto px-4 py-12 sm:py-16 relative z-10">
           <div className="max-w-4xl mx-auto">
@@ -253,21 +267,6 @@ export default async function Home() {
           </div>
         </div>
 
-        {/* Interactive 3D House - Zillow-like */}
-        <div className="container mx-auto px-4 relative z-10">
-          <div className="bg-white dark:bg-gray-800 rounded-lg p-4 sm:p-12 shadow-lg">
-            <h2 className="text-2xl sm:text-4xl font-bold text-center mb-3 sm:mb-6 text-gray-900 dark:text-white">
-              Your Digital Home 🏠
-            </h2>
-            <p className="text-center text-gray-700 dark:text-gray-200 mb-6 sm:mb-12 max-w-2xl mx-auto text-sm sm:text-lg leading-relaxed">
-              Take a virtual tour of your future home in the crypto world. Visualize your house flipping journey in 3D!
-            </p>
-            <div className="relative z-20">
-              <InteractiveHouse />
-            </div>
-          </div>
-        </div>
-
         {/* Stats Section - Zillow-like */}
         <div className="container mx-auto px-4 py-8 sm:py-24 relative z-10">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-3 sm:gap-8">
@@ -280,7 +279,7 @@ export default async function Home() {
               <p className="text-base sm:text-xl mt-1 sm:mt-4 text-gray-700 dark:text-gray-200">Total Supply</p>
               <p className="text-xs sm:text-base text-gray-600 dark:text-gray-300 mt-2 sm:mt-6">Enough for a whole neighborhood! 🏘️</p>
             </div>
-            
+
             <div className="group bg-white dark:bg-gray-800 p-4 sm:p-10 rounded-lg shadow-lg hover:shadow-xl transition-all transform hover:scale-105">
               <div className="relative">
                 <h3 className="text-2xl sm:text-4xl font-bold text-gray-900 dark:text-white relative">
@@ -290,7 +289,7 @@ export default async function Home() {
               <p className="text-base sm:text-xl mt-1 sm:mt-4 text-gray-700 dark:text-gray-200">Liquidity</p>
               <p className="text-xs sm:text-base text-gray-600 dark:text-gray-300 mt-2 sm:mt-6">Solid foundation! 🏗️</p>
             </div>
-            
+
             <div className="group bg-white dark:bg-gray-800 p-4 sm:p-10 rounded-lg shadow-lg hover:shadow-xl transition-all transform hover:scale-105">
               <div className="relative">
                 <h3 className="text-2xl sm:text-4xl font-bold text-gray-900 dark:text-white relative">
@@ -322,17 +321,17 @@ export default async function Home() {
                 {topHolders.map((holder, index) => (
                   <li key={index} className="group/item flex justify-between items-center p-3 sm:p-6 rounded-lg bg-gray-50 dark:bg-gray-700 
                     hover:bg-gray-100 dark:hover:bg-gray-600 transition-all transform hover:translate-x-2">
-                    <a 
+                    <a
                       href={`https://solscan.io/account/${holder.id}`}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-xs sm:text-base text-gray-700 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
                     >
-                      {holder.id === '5Q544fKrFoe6tsEbD7S8EmxGTJYAKtTVhAW5Q5pge4j1' ? 
-                        'RAYDIUM' : 
+                      {holder.id === '5Q544fKrFoe6tsEbD7S8EmxGTJYAKtTVhAW5Q5pge4j1' ?
+                        'RAYDIUM' :
                         holder.id === 'Gj5t6KjTw3gWW7SrMHEi1ojCkaYHyvLwb17gktf96HNH' ?
-                        'Pump.fun AMM' :
-                        `${holder.id.slice(0, 8)}...${holder.id.slice(-4)}`
+                          'Pump.fun AMM' :
+                          `${holder.id.slice(0, 8)}...${holder.id.slice(-4)}`
                       }
                     </a>
                     <span className="text-xs sm:text-base text-gray-900 dark:text-white font-semibold">{holder.percentage.toFixed(2)}%</span>
@@ -340,7 +339,7 @@ export default async function Home() {
                 ))}
               </ul>
             </div>
-            
+
             <div className="group bg-white dark:bg-gray-800 p-4 sm:p-10 rounded-lg shadow-lg hover:shadow-xl transition-all transform hover:scale-105">
               <h3 className="text-lg sm:text-2xl font-bold mb-3 sm:mb-8 text-gray-900 dark:text-white">Housing Market Analysis</h3>
               <ul className="space-y-2 sm:space-y-4">
@@ -386,9 +385,9 @@ export default async function Home() {
           <div className="flex flex-col sm:flex-row justify-center gap-2 sm:gap-6">
             {socialLinks.length > 0 ? (
               socialLinks.map((social: Social, index: number) => (
-                <a 
+                <a
                   key={index}
-                  href={social.url} 
+                  href={social.url}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="group relative px-4 sm:px-8 py-2 sm:py-4 bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white rounded-lg font-medium text-sm sm:text-base 
