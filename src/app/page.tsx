@@ -210,15 +210,27 @@ export default async function Home() {
                     target="_blank"
                     rel="noopener noreferrer"
                     className="group/btn relative px-6 sm:px-8 py-3 sm:py-4 bg-green-600 text-white rounded-lg font-bold text-sm sm:text-lg 
-                      hover:bg-green-700 transition-all transform hover:scale-105 mb-6"
+                      hover:bg-green-700 transition-all transform hover:scale-105"
                   >
                     <span className="relative z-10">Join X Community</span>
                   </a>
-                  <div className="w-full">
-                    <InstagramEmbed />
-                  </div>
                 </div>
               </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Instagram Feed Section */}
+        <div className="container mx-auto px-4 py-12 sm:py-16 relative z-10">
+          <div className="max-w-4xl mx-auto">
+            <h2 className="text-2xl sm:text-4xl font-bold text-center mb-4 sm:mb-8 text-gray-900 dark:text-white">
+              Follow Us on Instagram
+            </h2>
+            <p className="text-center text-gray-700 dark:text-gray-200 mb-8 sm:mb-12 max-w-2xl mx-auto text-sm sm:text-lg leading-relaxed">
+              Stay connected with our latest updates and community highlights
+            </p>
+            <div className="bg-white dark:bg-gray-800 p-6 sm:p-8 rounded-lg shadow-lg">
+              <InstagramEmbed />
             </div>
           </div>
         </div>
