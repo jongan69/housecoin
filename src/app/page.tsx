@@ -13,6 +13,8 @@ export const dynamic = 'force-dynamic';
 const URL = process.env.NEXT_PUBLIC_API_URL!;
 const CONTRACT_ADDRESS = process.env.NEXT_PUBLIC_CONTRACT_ADDRESS!;
 const MOONSHOT_LINK = process.env.MOONSHOT_LINK!;
+const TIKTOK_ACCOUNT = process.env.TIKTOK_ACCOUNT! ?? 'housecoinhodl';
+const INSTAGRAM_ACCOUNT = process.env.INSTAGRAM_ACCOUNT! ?? 'housecoinonsol';
 
 async function getTokenInfo() {
   try {
@@ -231,7 +233,7 @@ export default async function Home() {
               Stay connected with our latest updates and community highlights
             </p>
             <div className="bg-white dark:bg-gray-800 p-6 sm:p-8 rounded-lg shadow-lg">
-              <InstagramEmbed />
+              <InstagramEmbed account={INSTAGRAM_ACCOUNT! as string} />
             </div>
           </div>
         </div>
@@ -246,7 +248,7 @@ export default async function Home() {
               Check out our latest TikTok content and join our growing community
             </p>
             <div className="bg-white dark:bg-gray-800 p-6 sm:p-8 rounded-lg shadow-lg">
-              <TikTokEmbed />
+              <TikTokEmbed account={TIKTOK_ACCOUNT! as string} />
             </div>
           </div>
         </div>

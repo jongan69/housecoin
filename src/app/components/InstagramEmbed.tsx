@@ -2,6 +2,10 @@
 
 import { useEffect } from 'react';
 
+interface InstagramEmbedProps {
+  account: string;
+}
+
 declare global {
   interface Window {
     instgrm: {
@@ -12,7 +16,7 @@ declare global {
   }
 }
 
-export default function InstagramEmbed() {
+export default function InstagramEmbed({ account }: InstagramEmbedProps) {
   useEffect(() => {
     // Load Instagram embed script
     const script = document.createElement('script');
@@ -37,7 +41,7 @@ export default function InstagramEmbed() {
     <div className="flex justify-center my-8">
       <blockquote
         className="instagram-media"
-        data-instgrm-permalink="https://www.instagram.com/housecoinonsol/"
+        data-instgrm-permalink={`https://www.instagram.com/${account}/`}
         data-instgrm-version="14"
         style={{
           background: '#FFF',
@@ -53,7 +57,7 @@ export default function InstagramEmbed() {
       >
         <div style={{ padding: '16px' }}>
           <a
-            href="https://www.instagram.com/housecoinonsol/"
+            href={`https://www.instagram.com/${account}/`}
             style={{
               background: '#FFFFFF',
               lineHeight: '0',
