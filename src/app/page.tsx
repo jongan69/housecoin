@@ -6,6 +6,7 @@ import InteractiveHouse from './components/InteractiveHouse';
 import ThemeToggle from './components/ThemeToggle';
 import ParallaxHeader from './components/ParallaxHeader';
 import InstagramEmbed from './components/InstagramEmbed';
+import TikTokEmbed from './components/TikTokEmbed';
 
 export const dynamic = 'force-dynamic';
 
@@ -231,6 +232,21 @@ export default async function Home() {
             </p>
             <div className="bg-white dark:bg-gray-800 p-6 sm:p-8 rounded-lg shadow-lg">
               <InstagramEmbed />
+            </div>
+          </div>
+        </div>
+
+        {/* TikTok Feed Section */}
+        <div className="container mx-auto px-4 py-12 sm:py-16 relative z-10">
+          <div className="max-w-4xl mx-auto">
+            <h2 className="text-2xl sm:text-4xl font-bold text-center mb-4 sm:mb-8 text-gray-900 dark:text-white">
+              Follow Us on TikTok
+            </h2>
+            <p className="text-center text-gray-700 dark:text-gray-200 mb-8 sm:mb-12 max-w-2xl mx-auto text-sm sm:text-lg leading-relaxed">
+              Check out our latest TikTok content and join our growing community
+            </p>
+            <div className="bg-white dark:bg-gray-800 p-6 sm:p-8 rounded-lg shadow-lg">
+              <TikTokEmbed />
             </div>
           </div>
         </div>
