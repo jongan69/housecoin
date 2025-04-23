@@ -6,6 +6,8 @@ export const dynamic = 'force-dynamic';
 export const revalidate = 0;
 
 import { getTokenPrice } from "./lib/fetchTokenPirce";
+import { PostHogProvider } from "./components/PostHogProvider";
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -34,15 +36,13 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+        <PostHogProvider>
+          {children}
+        </PostHogProvider>
       </body>
     </html>
   );
