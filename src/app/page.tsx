@@ -1,4 +1,3 @@
-
 import TradingStats from './components/TradingStats';
 import LootGame from './components/LootGame';
 import InteractiveHouse from './components/InteractiveHouse';
@@ -6,6 +5,7 @@ import ThemeToggle from './components/ThemeToggle';
 import ParallaxHeader from './components/ParallaxHeader';
 import InstagramEmbed from './components/InstagramEmbed';
 import TikTokEmbed from './components/TikTokEmbed';
+import Products from './components/ProductsWrapper';
 
 export const dynamic = 'force-dynamic';
 
@@ -265,6 +265,11 @@ export default async function Home() {
               <TikTokEmbed account={TIKTOK_ACCOUNT! as string} />
             </div>
           </div>
+        </div>
+
+        {/* Products Section */}
+        <div className="relative z-10">
+          <Products />
         </div>
 
         {/* Stats Section - Zillow-like */}
