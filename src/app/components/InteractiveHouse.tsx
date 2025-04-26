@@ -19,21 +19,21 @@ interface AudioContextType {
   update: () => number;
 }
 
-// function createColorGenerator() {
-//   const colors = [
-//     "#FF5733", "#33FF57", "#3357FF", "#F833FF", "#33FFF8",
-//     "#F8FF33", "#FF3380", "#3380FF", "#80FF33", "#FF9633",
-//     "#9633FF", "#33FF96", "#FF3396", "#3396FF", "#96FF33",
-//     "#33FFCA", "#CAFF33", "#FFCA33", "#33CAFF", "#CA33FF"
-//   ];
-//   let currentIndex = 0;
+function createColorGenerator() {
+  const colors = [
+    "#FF5733", "#33FF57", "#3357FF", "#F833FF", "#33FFF8",
+    "#F8FF33", "#FF3380", "#3380FF", "#80FF33", "#FF9633",
+    "#9633FF", "#33FF96", "#FF3396", "#3396FF", "#96FF33",
+    "#33FFCA", "#CAFF33", "#FFCA33", "#33CAFF", "#CA33FF"
+  ];
+  let currentIndex = 0;
 
-//   return function getNextColor() {
-//     const color = colors[currentIndex];
-//     currentIndex = (currentIndex + 1) % colors.length;
-//     return color;
-//   };
-// }
+  return function getNextColor() {
+    const color = colors[currentIndex];
+    currentIndex = (currentIndex + 1) % colors.length;
+    return color;
+  };
+}
 
 function VideoBackground({ isPlaying }: { isPlaying: boolean }) {
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -595,6 +595,8 @@ export default function InteractiveHouse() {
   const [audioContext, setAudioContext] = useState<AudioContextType | null>(null);
   const [hasWebGL, setHasWebGL] = useState(true);
 
+  const getNextColor = useMemo(() => createColorGenerator(), []);
+
   useEffect(() => {
     setHasWebGL(isWebGLAvailable());
   }, []);
@@ -669,7 +671,15 @@ export default function InteractiveHouse() {
           {/* Dark overlay for better text readability */}
           <div className="absolute inset-0 bg-black/30 z-10" />
 
-          <VideoBackground isPlaying={isPlaying} />
+          {/* Vercel free tier limit was raped by the video background */}
+          {/* <VideoBackground isPlaying={isPlaying} /> */}
+          <div
+            className="absolute top-0 left-0 w-full h-full z-0"
+            style={{
+              background: `linear-gradient(135deg, ${getNextColor()}, ${getNextColor()})`,
+              transition: 'background 1s',
+            }}
+          />
 
           {/* Controls container with glassmorphism */}
           <div className="absolute top-4 left-1/2 transform -translate-x-1/2 z-20 text-center px-6 py-4 rounded-2xl backdrop-blur-md bg-white/10 border border-white/20 shadow-xl">
