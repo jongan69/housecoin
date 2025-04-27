@@ -14,6 +14,7 @@ const CONTRACT_ADDRESS = process.env.NEXT_PUBLIC_CONTRACT_ADDRESS!;
 const MOONSHOT_LINK = process.env.MOONSHOT_LINK!;
 const TIKTOK_ACCOUNT = process.env.TIKTOK_ACCOUNT! ?? 'housecoinhodl';
 const INSTAGRAM_ACCOUNT = process.env.INSTAGRAM_ACCOUNT! ?? 'housecoinonsol';
+const REALESTATE_MARKET_CAP = 180000000000000
 
 async function getTokenInfo() {
   try {
@@ -307,6 +308,50 @@ export default async function Home() {
           </div>
         </div>
 
+        {/* Progress Bar Section - Flipping the Housing Market */}
+        {(() => {
+          const FLIP_TARGET = REALESTATE_MARKET_CAP; // $50T
+          const percent = Math.min(100, (mainPair.marketCap / FLIP_TARGET) * 100);
+          const isClose = percent > 90;
+          return (
+            <div className="container mx-auto px-4 py-12 sm:py-20 relative z-20">
+              <div className="max-w-3xl mx-auto bg-gradient-to-br from-yellow-200 via-amber-300 to-yellow-500 dark:from-yellow-700 dark:via-amber-800 dark:to-yellow-900 rounded-3xl shadow-2xl p-8 sm:p-16 flex flex-col items-center border-4 border-amber-400/60 relative overflow-hidden animate-pulse">
+                <div className="absolute inset-0 pointer-events-none">
+                  <div className="w-full h-full bg-gradient-to-r from-yellow-400/20 via-amber-200/10 to-yellow-600/20 blur-2xl opacity-60 animate-pulse" />
+                </div>
+                <div className="relative z-10 flex flex-col items-center w-full">
+                  <span className="text-4xl sm:text-6xl mb-4 animate-bounce">🏠🚀</span>
+                  <h2 className="text-2xl sm:text-4xl font-extrabold text-amber-900 dark:text-yellow-200 mb-2 drop-shadow-lg text-center">
+                    Progress to Flipping the Housing Market
+                  </h2>
+                  <p className="text-lg sm:text-2xl text-amber-800 dark:text-yellow-100 mb-6 text-center font-semibold">
+                    ${formatNumber(mainPair.marketCap)} / ${formatNumber(REALESTATE_MARKET_CAP)} Market Cap
+                  </p>
+                  <div className="w-full bg-amber-100 dark:bg-yellow-900 rounded-full h-10 shadow-inner overflow-hidden mb-4 border-2 border-amber-400 relative">
+                    <div
+                      className="h-full bg-gradient-to-r from-yellow-400 via-amber-500 to-yellow-600 dark:from-yellow-400 dark:via-yellow-600 dark:to-yellow-800 animate-progress-glow"
+                      style={{ width: `${percent}%`, boxShadow: '0 0 40px 10px #fbbf24, 0 0 80px 20px #fde68a' }}
+                    >
+                      <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-xl sm:text-2xl font-bold text-amber-900 dark:text-yellow-100 drop-shadow-lg">
+                        {percent.toFixed(6)}%
+                      </span>
+                    </div>
+                  </div>
+                  {isClose ? (
+                    <div className="mt-4 text-2xl sm:text-3xl font-bold text-green-700 dark:text-green-300 animate-pulse">
+                      Almost there! The flip is near! 🎉
+                    </div>
+                  ) : (
+                    <div className="mt-4 text-lg sm:text-xl text-amber-900 dark:text-yellow-200">
+                      Help us flip the housing market! Every $HOUSE counts.
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
+          );
+        })()}
+
         {/* Trading Stats - Zillow-like */}
         <div className="container mx-auto px-4 py-8 sm:py-24 relative z-10">
           <div className="bg-white dark:bg-gray-800 rounded-lg p-4 sm:p-12 shadow-lg">
@@ -366,12 +411,12 @@ export default async function Home() {
                 <li className="group/item flex justify-between items-center p-3 sm:p-6 rounded-lg bg-gray-50 dark:bg-gray-700 
                   hover:bg-gray-100 dark:hover:bg-gray-600 transition-all transform hover:translate-x-2">
                   <span className="text-xs sm:text-base text-gray-700 dark:text-gray-200">Future Value</span>
-                  <span className="text-xs sm:text-base text-gray-900 dark:text-gray-100">$50T MC</span>
+                  <span className="text-xs sm:text-base text-gray-900 dark:text-gray-100">${formatNumber(REALESTATE_MARKET_CAP)}</span>
                 </li>
                 <li className="group/item flex justify-between items-center p-3 sm:p-6 rounded-lg bg-gray-50 dark:bg-gray-700 
                   hover:bg-gray-100 dark:hover:bg-gray-600 transition-all transform hover:translate-x-2">
-                  <span className="text-xs sm:text-base text-gray-700 dark:text-gray-200">Price Per $HOUSE at $50T MC</span>
-                  <span className="text-xs sm:text-base text-gray-900 dark:text-gray-100">${formatNumber(50000000000000 / parseFloat(totalSupply))}</span>
+                  <span className="text-xs sm:text-base text-gray-700 dark:text-gray-200">Price Per $HOUSE at ${formatNumber(REALESTATE_MARKET_CAP)} MC</span>
+                  <span className="text-xs sm:text-base text-gray-900 dark:text-gray-100">${formatNumber(REALESTATE_MARKET_CAP / parseFloat(totalSupply))}</span>
                 </li>
               </ul>
             </div>
@@ -422,7 +467,9 @@ export default async function Home() {
 }
 
 function formatNumber(num: number): string {
-  if (num >= 1000000) return `${(num / 1000000).toFixed(2)}M`;
-  if (num >= 1000) return `${(num / 1000).toFixed(2)}K`;
+  if (num >= 1_000_000_000_000) return `${(num / 1_000_000_000_000).toFixed(2)}T`;
+  if (num >= 1_000_000_000) return `${(num / 1_000_000_000).toFixed(2)}B`;
+  if (num >= 1_000_000) return `${(num / 1_000_000).toFixed(2)}M`;
+  if (num >= 1_000) return `${(num / 1_000).toFixed(2)}K`;
   return num.toFixed(2);
 }
