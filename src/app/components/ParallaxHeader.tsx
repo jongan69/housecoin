@@ -240,18 +240,18 @@ export default function ParallaxHeader({
                             href={`https://raydium.io/swap/?inputMint=sol&outputMint=${contractAddress}&referrer=9yA9LPCRv8p8V8ZvJVYErrVGWbwqAirotDTQ8evRxE5N`}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="flex-1 group relative px-6 sm:px-8 py-3 sm:py-4 bg-blue-600 text-white rounded-lg font-bold text-sm sm:text-lg hover:bg-blue-700 transition-all transform hover:scale-105 text-center"
+                            className="flex-1 flex justify-center items-center group relative px-6 sm:px-8 py-3 sm:py-4 bg-blue-600 text-white rounded-lg font-bold text-sm sm:text-lg hover:bg-blue-700 transition-all transform hover:scale-105 text-center"
                         >
                             <span className="relative z-10">Buy Your First House 🏠</span>
                         </a>
-                        <div className="flex-1 flex">
+                        <div className="flex-1 flex justify-center items-center">
                             <JupiterTerminalPopup />
                         </div>
                         <a
                             href={`https://t.me/bonkbot_bot?start=ref_jyzn2_ca_${contractAddress}`}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="flex-1 group relative px-6 sm:px-8 py-3 sm:py-4 bg-green-600 text-white rounded-lg font-bold text-sm sm:text-lg hover:bg-green-700 transition-all transform hover:scale-105 text-center"
+                            className="flex-1 flex justify-center items-center group relative px-6 sm:px-8 py-3 sm:py-4 bg-green-600 text-white rounded-lg font-bold text-sm sm:text-lg hover:bg-green-700 transition-all transform hover:scale-105 text-center"
                         >
                             <span className="relative z-10">Quick Flip with BONKbot 🤖</span>
                         </a>
@@ -259,7 +259,7 @@ export default function ParallaxHeader({
                             href={`https://phantom.app/tokens/solana/${contractAddress}?referralId=m0ezk5sfqrs`}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="flex-1 group relative px-6 sm:px-8 py-3 sm:py-4 bg-purple-600 text-white rounded-lg font-bold text-sm sm:text-lg hover:bg-purple-700 transition-all transform hover:scale-105 text-center"
+                            className="flex-1 flex justify-center items-center group relative px-6 sm:px-8 py-3 sm:py-4 bg-purple-600 text-white rounded-lg font-bold text-sm sm:text-lg hover:bg-purple-700 transition-all transform hover:scale-105 text-center"
                         >
                             <span className="relative z-10">Store in Your Wallet 👻</span>
                         </a>
@@ -267,7 +267,7 @@ export default function ParallaxHeader({
                             href={moonshotLink}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="flex-1 group relative px-6 sm:px-8 py-3 sm:py-4 bg-orange-600 text-white rounded-lg font-bold text-sm sm:text-lg hover:bg-orange-700 transition-all transform hover:scale-105 text-center"
+                            className="flex-1 flex justify-center items-center group relative px-6 sm:px-8 py-3 sm:py-4 bg-orange-600 text-white rounded-lg font-bold text-sm sm:text-lg hover:bg-orange-700 transition-all transform hover:scale-105 text-center"
                         >
                             <span className="relative z-10">Moon Shot 🚀</span>
                         </a>
