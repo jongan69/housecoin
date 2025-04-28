@@ -5,6 +5,7 @@ import Image from 'next/image';
 import Particles from './Particles';
 import GridPattern from './GridPattern';
 import ContractAddress from './ContractAddress';
+import JupiterTerminalPopup from './Jupiter';
 
 interface ParallaxHeaderProps {
     imageUrl: string;
@@ -246,6 +247,7 @@ export default function ParallaxHeader({
                         >
                             <span className="relative z-10">Buy Your First House 🏠</span>
                         </a>
+                        <JupiterTerminalPopup />
                         <a
                             href={`https://t.me/bonkbot_bot?start=ref_jyzn2_ca_${contractAddress}`}
                             target="_blank"

@@ -133,9 +133,9 @@ export default async function Home() {
   // If we don't have main pair data, show a loading state
   if (!mainPair || !mainPair.liquidity?.usd) {
     return (
-      <div className="min-h-screen bg-gradient-to-b from-amber-900 to-black text-white flex items-center justify-center">
+      <div className="min-h-screen bg-gradient-to-br from-white via-gray-50 to-gray-100 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 text-gray-900 dark:text-gray-100 flex items-center justify-center">
         <div className="text-center">
-          <h1 className="text-4xl sm:text-6xl font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-yellow-500 to-amber-500">
+          <h1 className="text-4xl sm:text-6xl font-bold mb-4 text-gray-900 dark:text-gray-100">
             Loading...
           </h1>
         </div>
