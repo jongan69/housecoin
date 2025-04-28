@@ -1,11 +1,12 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { PublicKey } from "@solana/web3.js";
 
 
 export default function JupiterTerminalPopup() {
     const [isOpen, setIsOpen] = useState(false);
     const [isJupiterReady, setIsJupiterReady] = useState(false);
+    const modalContentRef = useRef<HTMLDivElement>(null);
 
     // Example: SOL → HOUSE
     const initialInputMint = "So11111111111111111111111111111111111111112"; // SOL mint address
@@ -57,36 +58,56 @@ export default function JupiterTerminalPopup() {
         }
     }, [isOpen, isJupiterReady]);
 
-    return (
-        <>
-            <button
-                onClick={() => setIsOpen(true)}
-                className="group relative flex-1 px-6 sm:px-8 py-3 sm:py-4 bg-blue-600 text-white rounded-lg font-bold text-sm sm:text-lg shadow-lg hover:bg-blue-700 transition-all duration-200 transform hover:scale-105 flex justify-center items-center focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 dark:focus:ring-offset-gray-900"
-            >
-                <span className="relative z-10 flex items-center gap-2">
-                    🏡
-                    Open Jupiter Swap
-                </span>
-            </button>
+        // Close modal on outside click
+        useEffect(() => {
+            if (!isOpen) return;
+            function handleClickOutside(event: MouseEvent) {
+                if (
+                    modalContentRef.current &&
+                    !modalContentRef.current.contains(event.target as Node)
+                ) {
+                    setIsOpen(false);
+                }
+            }
+            document.addEventListener("mousedown", handleClickOutside);
+            return () => {
+                document.removeEventListener("mousedown", handleClickOutside);
+            };
+        }, [isOpen]);
 
-            {isOpen && (
-                <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm transition-all duration-300">
-                    <div className="relative flex items-center justify-center w-full h-full">
-                        <div className="relative bg-white/80 dark:bg-gray-900/90 rounded-2xl shadow-2xl p-0 sm:p-8 w-full max-w-3xl border border-white/20 dark:border-gray-700 backdrop-blur-lg overflow-hidden animate-fade-in flex flex-col items-center justify-center">
-                            <button
-                                onClick={() => setIsOpen(false)}
-                                className="absolute top-4 right-4 text-gray-500 dark:text-gray-300 hover:text-gray-700 dark:hover:text-white bg-white/60 dark:bg-gray-800/60 rounded-full p-2 shadow-md transition-all focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 dark:focus:ring-offset-gray-900 z-10"
-                                aria-label="Close Jupiter Swap"
+        return (
+            <>
+                <button
+                    onClick={() => setIsOpen(true)}
+                    className="group relative flex-1 px-6 sm:px-8 py-3 sm:py-4 bg-blue-600 text-white rounded-lg font-bold text-sm sm:text-lg shadow-lg hover:bg-blue-700 transition-all duration-200 transform hover:scale-105 flex justify-center items-center focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 dark:focus:ring-offset-gray-900"
+                >
+                    <span className="relative z-10 flex items-center gap-2">
+                       🏡 Open Jupiter Swap
+                    </span>
+                </button>
+    
+                {isOpen && (
+                    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm transition-all duration-300">
+                        <div className="relative flex items-center justify-center w-full h-full">
+                            <div
+                                ref={modalContentRef}
+                                className="relative bg-white/80 dark:bg-gray-900/90 rounded-2xl shadow-2xl p-0 sm:p-8 w-full max-w-3xl border border-white/20 dark:border-gray-700 backdrop-blur-lg overflow-hidden animate-fade-in flex flex-col items-center justify-center"
                             >
-                                <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
-                            </button>
-                            <div className="w-full h-[600px] flex items-center justify-center">
-                                <div id="integrated-terminal" className="w-full h-full" />
+                                <div className="w-full h-[600px] flex items-center justify-center">
+                                    <div id="integrated-terminal" className="w-full h-full" />
+                                </div>
+                                <button
+                                    onClick={() => setIsOpen(false)}
+                                    className="mt-8 mb-4 px-6 py-3 bg-blue-600 text-white rounded-lg font-bold text-sm sm:text-lg shadow-lg hover:bg-blue-700 transition-all duration-200 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 dark:focus:ring-offset-gray-900"
+                                    aria-label="Close Jupiter Swap"
+                                >
+                                    Close
+                                </button>
                             </div>
                         </div>
                     </div>
-                </div>
-            )}
-        </>
-    );
-}
+                )}
+            </>
+        );
+    }
+    
